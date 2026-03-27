@@ -6,4 +6,5 @@ export const routes: Routes = [
     {path: 'forget-password', loadComponent: () => import('./userAuth/forget/forget.component').then(m => m.ForgetComponent)},
     {path: 'verify', loadComponent: () => import('./userAuth/verify/verify.component').then(m => m.VerifyComponent)},
 
+     {path: 'dashboard', loadComponent: () => import('./SchoolManagement/dashboard/dashboard.component').then(m => m.DashboardComponent)},
 ];

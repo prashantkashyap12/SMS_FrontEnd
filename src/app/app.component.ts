@@ -32,7 +32,7 @@ export class AppComponent {
           this._common.navigate(['/dashboard']);
           
         } else if(this.sideBar === 'user'){
-          this._common.navigate(['/userdashboard']);
+          this._common.navigate(['/dashboard']);
         }
       } else {
         this.islogin = false;
