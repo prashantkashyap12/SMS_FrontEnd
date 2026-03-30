@@ -356,7 +356,7 @@
                     }
                    @else if(sideBar=="admin") {
                         <li class="side-nav-item">
-                            <a href="index.html" class="side-nav-link">
+                            <a routerLink="/dashboard" class="side-nav-link">
                                 <span class="menu-icon"><i data-lucide="circle-gauge"></i></span>
                                 <span class="menu-text" data-lang="dashboard">Dashboard</span>
                             </a>
@@ -373,34 +373,55 @@
                             <div class="collapse" id="sidebarPages1">
                                 <ul class="sub-menu">
                                     <li class="side-nav-item">
-                                        <a href="pages-pricing.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-pricing">Class and Section</span>
+                                        <a routerLink="/class" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-pricing">Class </span>
+                                        </a>
+                                    </li>
+                                     <li class="side-nav-item">
+                                        <a routerLink="/session" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-pricing">Section </span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-timeline.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-timeline">Session Year</span>
+                                        <a routerLink="/academic-year" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-timeline">Academic Year</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-empty.html" class="side-nav-link">
+                                        <a routerLink="/create-class" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-empty">Create Class</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item">
+                                        <a routerLink="/Fee-Type" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-empty">Fee Type</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a routerLink="/Fee-Stracture" class="side-nav-link">
                                             <span class="menu-text" data-lang="pages-empty">Fee Stracture</span>
                                         </a>
                                     </li>
+
                                     <li class="side-nav-item">
-                                        <a href="pages-empty.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-empty">Late Fee</span>
-                                        </a>
-                                    </li>
-                                
-                                    <li class="side-nav-item">
-                                        <a href="pages-terms-conditions.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-terms-conditions">User Role</span>
+                                        <a routerLink="/Create-Role" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-terms-conditions">Create Role</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-invoice.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="invoice">Invoice Type</span>
+                                        <a routerLink="/Create-User" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-terms-conditions">Create User</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a routerLink="/User-Approval" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-terms-conditions">User Approval</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a routerLink="/Invoice-Manager" class="side-nav-link">
+                                            <span class="menu-text" data-lang="invoice">Invoice Manager</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -417,18 +438,29 @@
                             <div class="collapse" id="sidebarPages2">
                                 <ul class="sub-menu">
                                     <li class="side-nav-item">
-                                        <a href="pages-pricing.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-pricing">Student Manager</span>
+                                        <a routerLink="/add-student" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-pricing">Student Create</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-timeline.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-timeline">Attenduce Manager</span>
+                                        <a routerLink="/view-student" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-pricing">Student View</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-empty.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="pages-empty">Id Card Manager</span>
+                                        <a routerLink="/student-doc" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-empty">Student Documnets</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="side-nav-item">
+                                        <a routerLink="/daily_attenduce" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-timeline">Attenduce Class</span>
+                                        </a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a routerLink="/check_attenduce" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-timeline">View Attenduce (Class/Student)</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -445,18 +477,18 @@
                             <div class="collapse" id="sidebarBaseUI">
                                 <ul class="sub-menu">
                                 <li class="side-nav-item">
-                                        <a href="pages-empty.html" class="side-nav-link">
+                                        <a routerLink="/manager-fee" class="side-nav-link">
                                             <span class="menu-text" data-lang="pages-empty">Fee Management</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="ui-core.html" class="side-nav-link">
+                                        <a routerLink="/collection-fee" class="side-nav-link">
                                             <span class="menu-text" data-lang="ui-core">Fee Collection Report</span>
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a href="pages-invoice.html" class="side-nav-link">
-                                            <span class="menu-text" data-lang="invoice">Fee Receipt</span>
+                                        <a routerLink="/print-fee" class="side-nav-link">
+                                            <span class="menu-text" data-lang="invoice">Print Receipt</span>
                                         </a>
                                     </li>
                                 </ul>

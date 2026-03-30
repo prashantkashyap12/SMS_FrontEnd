@@ -1,0 +1,9 @@
+.app-search{
+    position: relative;
+}
+.positionCustom{
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    color: #beb5b5;
+}

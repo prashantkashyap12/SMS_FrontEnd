@@ -1,1 +1,56 @@
-<p>class works!</p>
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row justify-content-center py-2 pt-3">
+            <div class="col-xxl-5 col-xl-7 text-center">
+                <h3 class="fw-bold">
+                    Form Validation
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-header justify-content-between">
+                        <h5 class="card-title">Create Class Name</h5>
+                        <div class="row g-lg-4 g-2">
+                            <div class="col-lg-4">
+                                <label for="SearchInput" class="col-form-label">Search Student</label>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="app-search">
+                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
+                                    <i class="ti ti-search fs-24 positionCustom"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="card-body">
+                        <form class="row g-3 needs-validation" >
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">Class Name</label>
+                                <input type="text" class="form-control" id="validationCustom01" value="John" required>
+                                <div class="valid-feedback">
+                                    Looks great!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom02" class="form-label">Class Roman Number</label>
+                                <input type="text" class="form-control" id="validationCustom02" value="Doe" required>
+                                <div class="valid-feedback">
+                                    Looks great!
+                                </div>
+                            </div>
+                           
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

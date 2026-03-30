@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LateFeeComponent } from './late-fee.component';
+import { FeeStractureComponent } from './fee-stracture.component';
 
-describe('LateFeeComponent', () => {
-  let component: LateFeeComponent;
-  let fixture: ComponentFixture<LateFeeComponent>;
+describe('FeeStractureComponent', () => {
+  let component: FeeStractureComponent;
+  let fixture: ComponentFixture<FeeStractureComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LateFeeComponent]
+      imports: [FeeStractureComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(LateFeeComponent);
+    fixture = TestBed.createComponent(FeeStractureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,1 +1,451 @@
-<p>add-student works!</p>
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row justify-content-center py-2 pt-3">
+            <div class="col-xxl-5 col-xl-7 text-center">
+                <h3 class="fw-bold">
+                    Student Fee Stracture
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header justify-content-between">
+                        <h5 class="card-title">Student Registraion</h5>
+                        <div class="row g-lg-4 g-2">
+                            <div class="col-lg-4">
+                                <label for="SearchInput" class="col-form-label">Search Student</label>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="app-search">
+                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
+                                    <i class="ti ti-search fs-24 positionCustom"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="ins-wizard" data-wizard>
+                            <!-- Navigation Tabs -->
+                            <ul class="nav nav-tabs wizard-tabs" data-wizard-nav role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#stuInfo">
+                                        <span class="d-flex align-items-center">
+                                            <i class="ti ti-user-circle fs-32"></i>
+                                            <span class="flex-grow-1 ms-2 text-truncate">
+                                                <span class="mb-0 lh-base d-block fw-semibold text-body fs-base">Student Info</span>
+                                                <span class="mb-0 fw-normal">Personal details</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#addrInfo">
+                                        <span class="d-flex align-items-center">
+                                            <i class="ti ti-map-pin fs-32"></i>
+                                            <span class="flex-grow-1 ms-2 text-truncate">
+                                                <span class="mb-0 lh-base d-block fw-semibold text-body fs-base">Address Info</span>
+                                                <span class="mb-0 fw-normal">Where you live</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#courseInfo">
+                                        <span class="d-flex align-items-center">
+                                            <i class="ti ti-book fs-32"></i>
+                                            <span class="flex-grow-1 ms-2 text-truncate">
+                                                <span class="mb-0 lh-base d-block fw-semibold text-body fs-base">Course Info</span>
+                                                <span class="mb-0 fw-normal">Select your course</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#parentInfo">
+                                        <span class="d-flex align-items-center">
+                                            <i class="ti ti-users fs-32"></i>
+                                            <span class="flex-grow-1 ms-2 text-truncate">
+                                                <span class="mb-0 lh-base d-block fw-semibold text-body fs-base">Parent Info</span>
+                                                <span class="mb-0 fw-normal">Guardian details</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#documents">
+                                        <span class="d-flex align-items-center">
+                                            <i class="ti ti-folder fs-32"></i>
+                                            <span class="flex-grow-1 ms-2 text-truncate">
+                                                <span class="mb-0 lh-base d-block fw-semibold text-body fs-base">Documents</span>
+                                                <span class="mb-0 fw-normal">Upload certificates</span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+
+                            <!-- Content -->
+                            <div class="tab-content pt-3" data-wizard-content>
+
+                                <!-- Step 1: Student Info -->
+                                <div class="tab-pane fade show active" id="stuInfo">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Addmission Number</label>
+                                                <input type="text" class="form-control" placeholder="Enter your full name" name="fullname" readonly required>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Date of Addmission</label>
+                                                <input class="form-control" id="example-month" type="date" name="month">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row ">
+                                                <div class="col-lg-12">
+                                                    <label class="col-form-label" style="padding-top: 0px;">Select Class with section</label>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <select class="form-select ">
+                                                        <option selected="">Select Class</option>
+                                                        <option value="I">1st</option>
+                                                        <option value="I">1st</option>
+                                                        <option value="I">1st</option>
+                                                        <option value="I">1st</option>
+                                                        <option value="I">1st</option>
+                                                        <option value="I">1st</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name</label>
+                                                <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Gender</label>
+                                                 <div class="mb-2">
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input class="form-control" id="example-month" type="date" name="month">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Adhar Card</label>
+                                                <input type="number" class="form-control" placeholder="Enter your AdharCard" name="ACN" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Blood Group</label>
+                                                <input type="text" class="form-control" placeholder="Enter your Blood Group" name="BG" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button type="button" class="btn btn-primary" data-wizard-next>Next: Address Info →</button>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2: Address Info -->
+                                <div class="tab-pane fade" id="addrInfo">
+                                    <div class="row">
+                                        <div class="col-xl-8">
+                                            <div class="mb-3">
+                                                <label class="form-label">Street Address</label>
+                                                <input type="text" class="form-control" name="street" placeholder="123 Main St" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Area Landmark</label>
+                                                <input type="text" class="form-control" name="street" placeholder="123 Main St" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">City</label>
+                                                <input type="text" class="form-control" name="city" placeholder="e.g., New York" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">State</label>
+                                                <input type="text" class="form-control" name="state" placeholder="e.g., California" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Pin Code</label>
+                                                <input type="text" class="form-control" name="zip" placeholder="e.g., 10001" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Student Info</button>
+                                        <button type="button" class="btn btn-primary" data-wizard-next>Next: Course Info →</button>
+                                    </div>
+                                </div>
+
+
+                                <!-- Step 3: Course Info -->
+                                <div class="tab-pane fade" id="courseInfo">
+                                    <div class="row">
+                                          <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Facilitys</label>
+                                                <div class="d-flex flex-wrap gap-4">
+                                                    <div class="form-check form-check-primary mb-2 fs-lg">
+                                                        <input type="checkbox" class="form-check-input" id="checkPrimary2" checked>
+                                                        <label class="form-check-label" for="checkPrimary2">School Fee</label>
+                                                    </div>
+                                                    <div class="form-check form-check-primary mb-2 fs-lg">
+                                                        <input type="checkbox" class="form-check-input" id="checkPrimary3">
+                                                        <label class="form-check-label" for="checkPrimary3">Bus Fee</label>
+                                                    </div>
+                                                    <div class="form-check form-check-primary mb-2 fs-lg">
+                                                        <input type="checkbox" class="form-check-input" id="checkPrimary4">
+                                                        <label class="form-check-label" for="checkPrimary4">Canteen Fee</label>
+                                                    </div>
+                                                    <div class="form-check form-check-primary mb-2 fs-lg">
+                                                        <input type="checkbox" class="form-check-input" id="checkPrimary5">
+                                                        <label class="form-check-label" for="checkPrimary5">Exam Fee</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Choose Course</label>
+                                                <select class="form-select" name="course" required>
+                                                    <option value="">Select</option>
+                                                    <option value="Engineering">Engineering</option>
+                                                    <option value="Medical">Medical</option>
+                                                    <option value="Business">Business</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Enrollment Type</label>
+                                                <select class="form-select" name="enrollment" required>
+                                                    <option value="">Select</option>
+                                                    <option value="Full Time">Full Time</option>
+                                                    <option value="Part Time">Part Time</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Preferred Batch Time</label>
+                                                <select class="form-select" name="batch_time" required>
+                                                    <option value="">Select Time</option>
+                                                    <option value="Morning">Morning (8am – 12pm)</option>
+                                                    <option value="Afternoon">Afternoon (1pm – 5pm)</option>
+                                                    <option value="Evening">Evening (6pm – 9pm)</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-xl-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Mode of Study</label>
+                                                <select class="form-select" name="mode" required>
+                                                    <option value="">Select Mode</option>
+                                                    <option value="Offline">Offline</option>
+                                                    <option value="Online">Online</option>
+                                                    <option value="Hybrid">Hybrid</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Address Info</button>
+                                        <button type="button" class="btn btn-primary" data-wizard-next>Next: Parent Info →</button>
+                                    </div>
+                                </div>
+
+
+                                <!-- Step 4: Parent Info -->
+                                <div class="tab-pane fade" id="parentInfo">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Father Name</label>
+                                                <input type="text" class="form-control" name="street" placeholder="123 Main St" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Mother Name</label>
+                                                <input type="text" class="form-control" name="street" placeholder="123 Main St" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Parent/Guardian Name</label>
+                                                <input type="text" class="form-control" name="parent_name" placeholder="e.g., John Doe" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Relation</label>
+                                                <div class="mb-2">
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Rela" id="inlineRadio11" value="option1" checked>
+                                                        <label class="form-check-label" for="inlineRadio11">Hindu</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Rela" id="inlineRadio12" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio12">Sikh</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Rela" id="inlineRadio13" value="option1" >
+                                                        <label class="form-check-label" for="inlineRadio13">Crichine</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Rela" id="inlineRadio14" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio14">Muslim</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category</label>
+                                                <div class="mb-2">
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Cat" id="inlineRadio31" value="option1" checked>
+                                                        <label class="form-check-label" for="inlineRadio31">GEN</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Cat" id="inlineRadio32" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio32">OBC</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Cat" id="inlineRadio33" value="option3" >
+                                                        <label class="form-check-label" for="inlineRadio33">SC</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="Cat" id="inlineRadio34" value="option4">
+                                                        <label class="form-check-label" for="inlineRadio34">ST</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="col-xl-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Parent Phone</label>
+                                                <input type="tel" class="form-control" name="parent_phone" placeholder="e.g., +1 555 123 4567" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Other Phone</label>
+                                                <input type="tel" class="form-control" name="parent_phone" placeholder="e.g., +1 555 123 4567" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Parent Email</label>
+                                                <input type="email" class="form-control" name="parent_email" placeholder="e.g., parent@example.com" required>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-xl-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category</label>
+                                                <div class="d-flex flex-wrap gap-4">
+                                                    <div class="mb-2">
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="castCat" id="inlineRadio21" value="option1" checked>
+                                                        <label class="form-check-label" for="inlineRadio21">Genral</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="castCat" id="inlineRadio22" value="option2">
+                                                        <label class="form-check-label" for="inlineRadio22">OBC</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="castCat" id="inlineRadio23" value="option3" >
+                                                        <label class="form-check-label" for="inlineRadio23">SC</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="castCat" id="inlineRadio24" value="option4">
+                                                        <label class="form-check-label" for="inlineRadio24">ST</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline fs-lg">
+                                                        <input class="form-check-input" type="radio" name="castCat" id="inlineRadio25" value="option5" >
+                                                        <label class="form-check-label" for="inlineRadio25">Other</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                     -->
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Course Info</button>
+                                        <button type="button" class="btn btn-primary" data-wizard-next>Next: Documents →</button>
+                                    </div>
+                                </div>
+
+
+                                <!-- Step 5: Documents -->
+                                <div class="tab-pane fade" id="documents">
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload ID Proof</label>
+                                        <input type="file" class="form-control" name="id_proof" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload Previous Marksheet</label>
+                                        <input type="file" class="form-control" name="marksheet" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload Guardian ID Proof</label>
+                                        <input type="file" class="form-control" name="id_Proof2" required>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Parent Info</button>
+                                        <button type="submit" class="btn btn-success">Submit Application</button>
+                                    </div>
+                                </div>
+
+                            </div> <!-- tab-content -->
+                        </div> <!-- ins-wizard -->
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card-->
+            </div> <!-- en col-->
+        </div>
+    </div>
+</div>

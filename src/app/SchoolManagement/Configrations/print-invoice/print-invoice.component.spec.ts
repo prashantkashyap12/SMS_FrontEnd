@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IdCardGenrationComponent } from './id-card-genration.component';
+import { PrintInvoiceComponent } from './print-invoice.component';
 
-describe('IdCardGenrationComponent', () => {
-  let component: IdCardGenrationComponent;
-  let fixture: ComponentFixture<IdCardGenrationComponent>;
+describe('PrintInvoiceComponent', () => {
+  let component: PrintInvoiceComponent;
+  let fixture: ComponentFixture<PrintInvoiceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IdCardGenrationComponent]
+      imports: [PrintInvoiceComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(IdCardGenrationComponent);
+    fixture = TestBed.createComponent(PrintInvoiceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
