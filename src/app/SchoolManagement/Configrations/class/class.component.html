@@ -28,17 +28,17 @@
                     </div>
 
                         <div class="card-body">
-                        <form class="row g-3 needs-validation" >
+                        <form class="row g-3 needs-validation" [formGroup]="classForm">
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Class Name</label>
-                                <input type="text" class="form-control" id="validationCustom01" value="John" required>
+                                <input type="text" class="form-control" id="validationCustom01" name="ClassName" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="validationCustom02" class="form-label">Class Roman Number</label>
-                                <input type="text" class="form-control" id="validationCustom02" value="Doe" required>
+                                <input type="text" class="form-control" id="validationCustom02" nmae="classRoman" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>

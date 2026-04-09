@@ -1,0 +1,22 @@
+
+* * * * * * * * * * * * * * * * *    API (Tudesday)  * * * * * * * * * * * * * * * * *
+
+Configration-
+1. Class                                       -   CRED  (_DONE_)  -  CRED Angular (____)
+2. Academic-year                               -   CRED  (_DONE_)  -  CRED Angular (____)
+3. Section                                     -   CRED  (_DONE_)  -  CRED Angular (____)
+4. Create Class (class + academic + section)   -   CRED  (_DONE_)  -  CRED Angular (____)
+3. Fee type                                    -   CRED  (_DONE_)  -  CRED Angular (____)
+4. Fee Stracture                               -   CRED  (_DONE_)  -  CRED Angular (____)
+
+Student management - 
+1. Add Student                                 -   CRED  (______)
+2. Attenduce management                        -   CRED  (______)
+3. Fee-Management                              -   CRED  (______)     
+
+Khata Book - 
+
+
+HRMS -
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
