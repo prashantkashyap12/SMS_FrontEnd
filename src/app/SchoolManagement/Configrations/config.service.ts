@@ -12,7 +12,7 @@ export class ConfigService {
   private baseUrls = new urls().webApiUrl;
  
  
-  // Add class -- OPEN
+  // Add class -- OPEN  - DONE
   viewClass():Observable<any>{
     let url = this.baseUrls;
     return this._http.get(url);
@@ -29,8 +29,7 @@ export class ConfigService {
     let url = this.baseUrls;
     return this._http.post(url, model);
   }
-
-  // Add Academic -- OPEN
+  // Add Academic -- OPEN  --  DONE
   viewAcademic():Observable<any>{
     let url = this.baseUrls;
     return this._http.get(url);

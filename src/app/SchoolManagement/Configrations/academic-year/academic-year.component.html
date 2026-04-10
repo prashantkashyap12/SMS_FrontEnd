@@ -20,18 +20,38 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="app-search">
-                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
-                                    <i class="ti ti-search fs-24 positionCustom"></i>
+                                    <!-- <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
+                                    <i class="ti ti-search fs-24 positionCustom"></i> -->
+                                    <div class="ng-autocomplete">
+                                        <ng-autocomplete 
+                                        [data]="data"
+                                        [searchKeyword]="keyboard"
+                                        placeholder="Select country"
+                                        (selected)='selectEvent($event)'
+                                        (inputChanged)='onChangeSearch($event)'
+                                        (inputFocused)='onFocused($event)'
+                                        [itemTemplate]="itemTemplate"
+                                        [notFoundTemplate]="notFoundTemplate">                                 
+                                        </ng-autocomplete>
+
+                                        <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.name"></a>
+                                        </ng-template>
+
+                                        <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                        <div class="card-body">
-                        <form class="row g-3 needs-validation" >
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" [formGroup]="accdemicForm">
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Session Name</label>
-                                <input type="text" class="form-control" id="validationCustom01" value="John" required>
+                                <input type="text" class="form-control" id="validationCustom01" formControlName="AcademicName" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
@@ -42,7 +62,7 @@
                                         <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
                                     </div>
                                     <div class="col-lg-12">
-                                        <select class="form-select ">
+                                        <select class="form-select" formControlName="AcademicYear" required>
                                             <option selected="">Select Academic session</option>
                                             <option value="2024-2025">2024-2025</option>
                                             <option value="2025-2026">2025-2026</option>
@@ -56,7 +76,9 @@
                             </div>
                 
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Create</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-secondary'">{{isButton?'Create':'Update'}}</button>
+                                <button class="btn btn-primary" type="submit" (click)="delete()" [ngStyle]="{'display':isButton?'none':'block'}">Delete</button>
+                                <button class="btn btn-primary" type="submit" (click)="allot()">Clear</button>
                             </div> 
                         </form>
                     </div>

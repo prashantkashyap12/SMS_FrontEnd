@@ -1,3 +1,4 @@
+<!-- waiting for working on api and then i will update this code for api response and also for edit and delete functionality  -->
 <div class="content-page">
     <div class="container-fluid">
         <div class="row justify-content-center py-2 pt-3">
@@ -20,32 +21,59 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="app-search">
-                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
-                                    <i class="ti ti-search fs-24 positionCustom"></i>
+                                    <!-- <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
+                                    <i class="ti ti-search fs-24 positionCustom"></i> -->
+
+                                    <div class="ng-autocomplete">
+                                        <ng-autocomplete 
+                                        [data]="data"
+                                        [searchKeyword]="keyword"
+                                        placeholder="Select country"
+                                        (selected)='selectEvent($event)'
+                                        (inputChanged)='onChangeSearch($event)'
+                                        (inputFocused)='onFocused($event)'
+                                        [itemTemplate]="itemTemplate"
+                                        [notFoundTemplate]="notFoundTemplate">                                 
+                                        </ng-autocomplete>
+
+                                        <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.name"></a>
+                                        </ng-template>
+
+                                        <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                        <div class="card-body">
+                    <div class="card-body">
                         <form class="row g-3 needs-validation" [formGroup]="classForm">
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Class Name</label>
-                                <input type="text" class="form-control" id="validationCustom01" name="ClassName" required>
+                                <input type="text" class="form-control" id="validationCustom01" formControlName="ClassName" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="validationCustom02" class="form-label">Class Roman Number</label>
-                                <input type="text" class="form-control" id="validationCustom02" nmae="classRoman" required>
+                                <input type="text" class="form-control" id="validationCustom02" formControlName="classRoman" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                            
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Create</button>
+                                <!-- Submit or update -->
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-outline-secondary'">{{isButton?'Create':'Update'}}</button>&nbsp;
+                                <!-- Delete -->
+                                <button class="btn btn-outline-secondary" type="button" (click)="delete()" [ngStyle]="{'display': isButton ? 'none' : 'block'}" >Delete</button>&nbsp;
+                                <!-- Fresh -->
+                                <button class="btn btn-outline-secondary" type="button" (click)="clear()">Clear</button>&nbsp;
                             </div> 
                         </form>
                     </div>
@@ -54,3 +82,4 @@
         </div>
     </div>
 </div>
+
