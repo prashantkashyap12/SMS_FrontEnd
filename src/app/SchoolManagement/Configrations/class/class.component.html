@@ -16,19 +16,13 @@
                     <div class="card-header justify-content-between">
                         <h5 class="card-title">Create Class Name</h5>
                         <div class="row g-lg-4 g-2">
-                            <div class="col-lg-4">
-                                <label for="SearchInput" class="col-form-label">Search Student</label>
-                            </div>
                             <div class="col-lg-8">
                                 <div class="app-search">
-                                    <!-- <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
-                                    <i class="ti ti-search fs-24 positionCustom"></i> -->
-
                                     <div class="ng-autocomplete">
                                         <ng-autocomplete 
                                         [data]="data"
                                         [searchKeyword]="keyword"
-                                        placeholder="Select country"
+                                        placeholder="Select Class"
                                         (selected)='selectEvent($event)'
                                         (inputChanged)='onChangeSearch($event)'
                                         (inputFocused)='onFocused($event)'
@@ -37,7 +31,7 @@
                                         </ng-autocomplete>
 
                                         <ng-template #itemTemplate let-item>
-                                        <a [innerHTML]="item.name"></a>
+                                        <a [innerHTML]="item.ClassName"></a>
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
@@ -61,13 +55,13 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="validationCustom02" class="form-label">Class Roman Number</label>
-                                <input type="text" class="form-control" id="validationCustom02" formControlName="classRoman" required>
+                                <input type="text" class="form-control" id="validationCustom02" formControlName="ClassNumber" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                            
-                            <div class="col-12">
+                            <div class="col-12 d-flex">
                                 <!-- Submit or update -->
                                 <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-outline-secondary'">{{isButton?'Create':'Update'}}</button>&nbsp;
                                 <!-- Delete -->

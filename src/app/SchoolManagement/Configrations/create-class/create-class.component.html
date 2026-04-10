@@ -35,7 +35,7 @@
                                         </ng-autocomplete>
 
                                         <ng-template #itemTemplate let-item>
-                                        <a [innerHTML]="item.name"></a>
+                                        <a [innerHTML]="item.GenClassValue"></a>
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
@@ -51,7 +51,7 @@
                         <form class="row g-3 needs-validation" [formGroup]="GenClassForm">
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Session Name</label>
-                                <input type="text" class="form-control" id="validationCustom01" value="I-A-25/26" formControlName="className" readonly required>
+                                <input type="text" class="form-control" id="validationCustom01" [(ngModel)]="selectedSessionId" formControlName="GenClassValue" readonly required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
@@ -59,17 +59,23 @@
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Class</label>
                                     </div>
                                     <div class="col-lg-12">
-                                        <select class="form-select" formControlName="classRoman">
-                                            <option selected="">Select Session</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
+                                        <select class="form-select" formControlName="ClassId" >
+                                            <option *ngFor="let a of this.ClassIdLs" [value]="a.ClassId" (onChange)="dataBinding1(a.ClassName,a.ClassId)" >{{a.ClassName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row ">
+                                    <div class="col-lg-12">
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Section</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <select class="form-select" formControlName="SectionId">
+                                            <option *ngFor="let a of this.ClassSectionIdLs" [value]="a.SectionId" (onChange)="dataBinding2(a.SectionName,a.SectionId)">{{a.SectionName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -80,38 +86,14 @@
                                         <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
                                     </div>
                                     <div class="col-lg-12">
-                                        <select class="form-select" formControlName="classSection">
-                                            <option selected="">Select Section</option>
-                                            <option value="A">A</option>
-                                            <option value="A">A</option>
-                                            <option value="A">A</option>
-                                            <option value="A">A</option>
-                                            <option value="A">A</option>
-                                            <option value="A">A</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row ">
-                                    <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <select class="form-select" formControlName="academicSession">
-                                            <option selected="">Select Academic session</option>
-                                            <option value="2024-2025">2024-2025</option>
-                                            <option value="2025-2026">2025-2026</option>
-                                            <option value="2026-2027">2026-2027</option>
-                                            <option value="2027-2028">2027-2028</option>
-                                            <option value="2028-2029">2028-2029</option>
-                                            <option value="2029-2030">2029-2030</option>
+                                        <select class="form-select" formControlName="SessionId">
+                                            <option *ngFor="let a of this.AcademicSessionIdLs" [value]="a.SessionId" (onChange)="dataBinding3(a.SessionName,a.SessionId)">{{a.SessionName}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                 
-                            <div class="col-12">
+                            <div class="col-12 d-flex">
                                 <!-- Submit or update -->
                                 <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-outline-secondary'">{{isButton?'Create':'Update'}}</button>&nbsp;
                                 <!-- Delete -->

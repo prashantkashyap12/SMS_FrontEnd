@@ -16,26 +16,30 @@ import { ConfigService } from '../config.service';
 export class AcademicYearComponent {
 
   data:any = [];
-  keyboard = 'name';
+  keyboard = 'SessionName';
   accdemicForm!:FormGroup
   isButton = true;
   constructor(private _fb: FormBuilder, private _configService: ConfigService){}
   ngOnInit(){
     this.Init();
+    this.allot();
   }
 
   Init(){
     this.accdemicForm = this._fb.group({
-      AcademicName: ['', Validators.required],
-      AcademicYear: ['', Validators.required],
+      SessionName: ['', Validators.required],
+      SessionYear: ['', Validators.required],
+      SessionId:[0]
     })
   }
 
   // ng Autocomplete Methods -- open
   selectEvent(item:any){
     this.accdemicForm.patchValue({
-      AcademicName:item.AcademicName,
-      AcademicYear:item.AcademicYear
+      SessionName:item.SessionName,
+      SessionYear:item.SessionYear,
+      SessionId:item.SessionId
+
     });
     this.isButton = false; 
   }
@@ -50,48 +54,41 @@ export class AcademicYearComponent {
       return;
     }
     let model = {
-      AcademicName: this.accdemicForm.value.AcademicName,
-      AcademicYear: this.accdemicForm.value.AcademicYear
+      SessionName: this.accdemicForm.value.SessionName,
+      SessionYear: this.accdemicForm.value.SessionYear,
+      SessionId:this.accdemicForm.value.SessionId??0
     }
     if(this.isButton){
-      this._configService.addAcademic(model).subscribe({
-        next:(res)=>{
+      this._configService.addAcademic(model).subscribe(res=>{
+        // next:(res)=>{  
           alert("Academic Year Added Successfully");
-          this.accdemicForm.reset();
           this.clear();
         },
-        error:(err)=>{
+        (err)=>{
           alert("Error while adding Academic Year");
-        }
-      })
+        })
     }else{
-      this._configService.updateAcademic(model).subscribe({
-        next:(res)=>{
+      this._configService.updateAcademic(model).subscribe(res=>{
+        // (res)=>{
           alert("Academic Year Updated Successfully");  
           this.clear();
         },
-        error:(err)=>{
+        (err)=>{
           alert("Error while updating Academic Year");
         }
-      })
+      )}
     }
-
-  }
   // Allot Methods
   allot(){
-    this._configService.viewAcademic().subscribe({
-      next:(res)=>{
-        this.data = res;
-        this.clear();
-      },
-      error:(err)=>{
-        alert("Error while fetching Academic Year");
-      }
-    })
+    this._configService.viewAcademic().subscribe(res=>{ 
+        this.data = res.data;
+      },err=>{
+          alert("Error while fetching Academic Year");
+      })
   }
   // Delete Methord
   delete(){
-    this._configService.delAcademic(this.accdemicForm.value.AcademicName).subscribe({
+    this._configService.delAcademic(this.accdemicForm.value.SessionId).subscribe({
       next:(res)=>{
         alert("Academic Year Deleted Successfully");
         this.clear();
@@ -104,5 +101,7 @@ export class AcademicYearComponent {
   // Clear Methord
   clear(){
     this.ngOnInit();
+    this.accdemicForm.reset();
+    this.isButton = true;
   }
 }

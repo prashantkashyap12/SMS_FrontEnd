@@ -16,12 +16,13 @@ import { ConfigService } from '../config.service';
 export class CreateClassComponent {
 
   data = [];
-  keyboard = 'name'
+  keyboard = 'GenClassValue'
   isButton = true;
   GenClassForm!:FormGroup;
-  ClassId:any
-  ClassSectionId:any
-  AcademicSessionId:any
+  ClassIdLs:any=[]
+  ClassSectionIdLs:any=[]
+  AcademicSessionIdLs:any=[]
+  selectedSessionId:any = "Two Way DataBinding"
 
   constructor(private _configService:ConfigService, private _Fb:FormBuilder){}
 
@@ -32,33 +33,42 @@ export class CreateClassComponent {
 
   Init(){
     this.GenClassForm = this._Fb.group({
-      className: ['', Validators.required],
-      classRoman: ['', Validators.required],
-      classSection: ['', Validators.required],
-      academicSession: ['', Validators.required]
+      GenClassValue: [ Validators.required],
+      ClassId: [0, Validators.required],
+      SectionId: [0, Validators.required],
+      SessionId: [0, Validators.required],
+      GenClassKey:0
     })
   }
+
+  // Data Marged
+  dataBinding1(val:any,Id:any){
+    
+  }
+  dataBinding2(val:any,Id:any){}
+  dataBinding3(val:any,Id:any){}
+
 
   //Data allot of classRoman, classSection, academicSession, 
   allot(){
     // ClassId:any
     this._configService.viewGenClass().subscribe(res=>{
-      this.data = res;
+      this.data = res.data;
     })
 
     // ClassId:any
     this._configService.viewClass().subscribe(res=>{
-      this.ClassId = res;
+      this.ClassIdLs = res.data;
     });
 
     // ClassSectionId:any
     this._configService.viewSection().subscribe(res=>{
-      this.ClassSectionId = res;
+      this.ClassSectionIdLs = res.data;
     });
 
     // AcademicSessionId:any
     this._configService.viewAcademic().subscribe(res=>{
-      this.AcademicSessionId = res;
+      this.AcademicSessionIdLs = res.data;
     });
   }
 
@@ -66,10 +76,11 @@ export class CreateClassComponent {
   // Auto Complete -- OPEN
   selectEvent(item:any){
     this.GenClassForm.patchValue({
-      className:item.ClassName,
-      classRoman:item.classRoman,
-      classSection:item.classSection,
-      academicSession:item.academicSession
+      GenClassValue:item.GenClassValue,
+      ClassId:item.ClassId,
+      SectionId:item.SectionId,
+      SessionId:item.SessionId,
+      GenClassKey:item.GenClassKey
     });
     this.isButton = false; 
   }
@@ -85,10 +96,11 @@ export class CreateClassComponent {
       return;
     }
     let model = {
-      ClassName: this.GenClassForm.value.className,
-      classRoman: this.GenClassForm.value.classRoman,
-      classSection: this.GenClassForm.value.classSection,
-      academicSession: this.GenClassForm.value.academicSession,
+      GenClassValue: this.GenClassForm.value.GenClassValue,
+      ClassId: this.GenClassForm.value.ClassId,
+      SectionId: this.GenClassForm.value.SectionId,
+      SessionId: this.GenClassForm.value.SessionId,
+      GenClassKey:this.GenClassForm.value.GenClassKey??0
     }
     // API Call
     if(this.isButton){
@@ -114,7 +126,7 @@ export class CreateClassComponent {
       alert("Please select a class to delete");
       return;
     }
-    this._configService.delGenClass(this.GenClassForm.value.className).subscribe(res=>{
+    this._configService.delGenClass(this.GenClassForm.value.GenClassKey).subscribe(res=>{
       alert("Class Deleted Successfully");
       this.clear();
     }, err=>{
@@ -125,7 +137,7 @@ export class CreateClassComponent {
   // Clear Form
   clear(){
     this.GenClassForm.reset();
-    this.isButton = true;``
+    this.isButton = true;
     this.allot();
   }
 

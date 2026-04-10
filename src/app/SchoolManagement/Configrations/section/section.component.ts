@@ -16,7 +16,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 export class SectionComponent {
 
   data = [];
-  keyboard = 'name';
+  keyboard = 'SectionName';
   isButton = true;
   sectionForm!:FormGroup;  
 
@@ -29,8 +29,9 @@ export class SectionComponent {
 
   Init(){
     this.sectionForm = this._Fb.group({
-      sectionName: ['',[Validators.required]],
-      sectionNumber: ['',[Validators.required]]
+      SectionName: ['',[Validators.required]],
+      SectionNumber: ['',[Validators.required]],
+      SectionId:[0]
     })  
   }
 
@@ -39,8 +40,9 @@ export class SectionComponent {
   // Auto Complete -- OPEN
   selectEvent(a:any){
     this.sectionForm.patchValue({
-      sectionName: a.sectionName,
-      sectionNumber: a.sectionNumber
+      SectionName: a.SectionName,
+      SectionNumber: a.SectionNumber,
+      SectionId:a.SectionId
     });
     this.isButton = false;   
   }
@@ -54,8 +56,8 @@ export class SectionComponent {
 
   // Data Allot Methrod
   allot(){
-    this._configService.viewClass().subscribe(res=>{
-      this.data = res;
+    this._configService.viewSection().subscribe(res=>{
+      this.data = res.data;
     }, err=>{
       alert("Error while fetching class data");
     })
@@ -70,9 +72,9 @@ export class SectionComponent {
     }
 
     let model = {
-      sectionName: this.sectionForm.value.sectionName,
-      sectionNumber: this.sectionForm.value.sectionNumber,
-      CreatedBy: 1,
+      SectionName: this.sectionForm.value.SectionName,
+      SectionNumber: this.sectionForm.value.SectionNumber,
+      SectionId: this.sectionForm.value.SectionId??0,
       CreatedOn: new Date()
     }
 
@@ -96,7 +98,7 @@ export class SectionComponent {
 
   // Delete Methord
   delete(){
-    this._configService.delSection(this.sectionForm.value.sectionName).subscribe(res=>{
+    this._configService.delSection(this.sectionForm.value.SectionId).subscribe(res=>{
       alert("Section Deleted Successfully");
       this.clear();
     }, err=>{

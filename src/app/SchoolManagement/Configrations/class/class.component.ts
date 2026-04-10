@@ -18,14 +18,15 @@ export class ClassComponent {
 
   // Basic definations
   classForm!:FormGroup
-  keyword = 'name';
+  keyword = 'ClassName';
   data = [];
   isButton = true;
 
 
   constructor(private _fb:FormBuilder, private _configService: ConfigService){}
   ngOnInit(){
-    this.Init()
+    this.Init();
+    this.allot();
   }
 
 
@@ -33,15 +34,17 @@ export class ClassComponent {
   Init(){
     this.classForm = this._fb.group({
       ClassName: ['',Validators.required],
-      classRoman: ['', Validators.required]
+      ClassNumber: ['', Validators.required],
+      ClassId:[0]
     })
   }
 
   // ng Autocomplete Methods -- open
   selectEvent(item:any){
     this.classForm.patchValue({
-      className:item.ClassName,
-      classRoman:item.classRoman
+      ClassName:item.ClassName,
+      ClassNumber:item.ClassNumber,
+      ClassId:item.ClassId
     });
     this.isButton = false; 
   }
@@ -60,9 +63,9 @@ export class ClassComponent {
 
     // Api formatting
     let model = {
-      ClassName: this.classForm.value.ClassName,
-      classRoman: this.classForm.value.classRoman,
-      CreatedBy: 1,
+      ClassName: this.classForm.value.ClassName??'',
+      ClassNumber: this.classForm.value.ClassNumber??'',
+      ClassId: this.classForm.value.ClassId??0,
       CreatedOn: moment().format('YYYY-MM-DD HH:mm:ss')
     }
 
@@ -81,7 +84,7 @@ export class ClassComponent {
         alert("Class Updated Successfully");
         this.clear();
       }, err=>{
-        alert("Error while updating class");
+        console.log(err);
       })
     }
   }
@@ -90,7 +93,7 @@ export class ClassComponent {
   // Data Allot Methrod
   allot(){
     this._configService.viewClass().subscribe(res=>{
-      this.data = res;
+      this.data = res.data;
     }, err=>{
       alert("Error while fetching class data");
     })
@@ -98,7 +101,7 @@ export class ClassComponent {
 
   // Delete Methord
   delete(){
-    this._configService.delClass(this.classForm.value.ClassName).subscribe(res=>{
+    this._configService.delClass(this.classForm.value.ClassId).subscribe(res=>{
       alert("Class Deleted Successfully");
       this.clear();
     }, err=>{
@@ -111,6 +114,7 @@ export class ClassComponent {
   // Clear Form
   clear(){
     this.ngOnInit();
+    this.isButton = true;
   }
 
 
