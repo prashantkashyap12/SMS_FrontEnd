@@ -3,7 +3,7 @@
         <div class="row justify-content-center py-2 pt-3">
             <div class="col-xxl-5 col-xl-7 text-center">
                 <h3 class="fw-bold">
-                    Student Fee Stracture
+                    <!-- Student Fee Stracture -->
                 </h3>
             </div>
         </div>
@@ -35,7 +35,7 @@
                                         </ng-autocomplete>
 
                                         <ng-template #itemTemplate let-item>
-                                        <a [innerHTML]="item.name"></a>
+                                        <a [innerHTML]="item.FeeStractRemark"></a>
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
@@ -52,17 +52,12 @@
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Fee Section</label>
                                     </div>
                                     <div class="col-lg-12">
-                                        <select class="form-select" formControlName="ClassId">
-                                            <option selected="">Select Class</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
+                                        <select class="form-select" formControlName="FeeId" (change)="dataVal($event)" required>
+                                            <option selected="">Select Fee Section</option>
+                                            <option *ngFor="let a of this.FeeIdRec" [value]="a.FeeId">{{ a.FeeName }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -70,38 +65,33 @@
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Genrated Class</label>
                                     </div>
                                     <div class="col-lg-12">
-                                        <select class="form-select" formControlName="AcademicSessionId">
-                                            <option selected="">Select Fee</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
+                                        <select class="form-select" formControlName="ClassId" (change)="dataVal($event)" >
+                                            <option selected="">Select Genrated Class</option>
+                                            <option *ngFor="let a of this.ClassIdRec" [value]="a.ClassId">{{ a.GenClassValue }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label for="validationCustom01" class="form-label">Fee Amount</label>
-                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" formControlName="FeeAmount" required>
+                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" formControlName="Fee_Amount" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <label for="validationCustom01" class="form-label">Late Fee Penalty </label>
-                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" formControlName="LateFeePenalty" required>
+                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" formControlName="Fee_Panalty"  required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="validationCustom02" class="form-label">Remark</label>
-                                <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Comment..." formControlName="Remark" required>
+                                <label for="validationCustom02" class="form-label">Fee Name</label>
+                                <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Fee Name..." formControlName="FeeStractRemark" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
@@ -117,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 d-flex">
                                  <!-- Submit or update -->
                                 <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-outline-secondary'">{{isButton?'Create':'Update'}}</button>&nbsp;
                                 <!-- Delete -->

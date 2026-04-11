@@ -5,12 +5,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { StdManagService } from '../std-manag.service';
 import moment from 'moment';
+import { ConfigService } from '../../Configrations/config.service';
 
 @Component({
   selector: 'app-add-student',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, AutocompleteLibModule],
-  providers: [StdManagService],
+  providers: [StdManagService, ConfigService],
   templateUrl: './add-student.component.html',
   styleUrl: './add-student.component.css'
 })
@@ -22,74 +23,97 @@ export class AddStudentComponent {
   keyboard: string = 'firstName';
 
 
-  constructor(private stdManagService: StdManagService, private _fb: FormBuilder) {}
+  constructor(private _stdManagService: StdManagService, private _configService: ConfigService, private _fb: FormBuilder) {}
 
-  ngOnInit() {
-    this.addStudentForm = this._fb.group({
-      AddmissionNumber: ['',Validators.required],
-      dateOfAdmission: ['',Validators.required],
-      ClassId: ['',Validators.required],
-      firstName: ['',Validators.required],
-      lastName: ['',Validators.required],
-      gender: ['',Validators.required],
-      dateOfBirth: ['',Validators.required],
-      adharCard: ['',Validators.required],
-      bloodGroup: ['',Validators.required],
-      street: ['',Validators.required],
-      areaLandmark: ['',Validators.required],
-      city: ['',Validators.required],
-      state: ['',Validators.required],
-      pinCode: ['',Validators.required],
-      facility1: ['',Validators.required],
-      facility2: ['',Validators.required],
-      facility3: ['',Validators.required],
-      facility4: ['',Validators.required],
-      StudyMode: ['',Validators.required],
-      FatherName: ['',Validators.required],
-      MotherName: ['',Validators.required],
-      ParentName: ['',Validators.required],
-      Relation: ['',Validators.required],
-      Category: ['',Validators.required],
-      parent_phone: ['',Validators.required],
-      other_phone: ['',Validators.required],
-      parent_email: ['',Validators.required],
-      id_proof: ['',Validators.required],
-      marksheet: ['',Validators.required],
-      guardian_id_proof: ['',Validators.required]
-    });
-  }
+    ngOnInit() {
+      this.Init();
+      this.Allot();
+    }
+
+    Init(){
+      this.addStudentForm = this._fb.group({
+        AdmissionId: [0],
+        // P1
+        StrudnetTran: [''],
+        AdmissionDate: [''],
+        ClassGenId: [0],
+        FirstName: [''],
+        LastName: [''],
+        Gender: ['male'],
+        DateOfBirth: [''],
+        UID: [''],
+        BloodGroup: [''],
+
+        // P2
+        AddressLine1: [''],
+        Landmark: [''],
+        City: [''],
+        State: [''],
+        PinCode: [''],
+
+        // P3
+        facility1: [true],
+        facility2: [false],
+        facility3: [false],
+        facility4: [false],
+        StudyMode: [''],
+
+
+        // P4
+        FatherName: [''],
+        MotherName: [''],
+        GuardianName: [''],
+        Religtion: ['Hindu'],
+        Caste: ['Hindu'],
+        PrimaryContact: [''],
+        SecondaryContact: [''],
+        ParentsEmail: [''],
+
+        // P5
+        id_proof: [''],
+        marksheet: [''],
+        guardian_id_proof: ['']
+      });
+    }
 
 
     // Auto Complete -- OPEN
   selectEvent(item:any){
+    let FeeLsId = item.FeeLsId.split(',').map((id: string) => id.trim());
     this.addStudentForm.patchValue({
-      AddmissionNumber: item.AddmissionNumber,
-      dateOfAdmission: item.dateOfAdmission,
-      ClassId: item.ClassId,
-      firstName: item.firstName,
-      lastName: item.lastName,
-      gender: item.gender,
-      dateOfBirth: item.dateOfBirth,
-      adharCard: item.adharCard,
-      bloodGroup: item.bloodGroup,
-      street: item.street,
-      areaLandmark: item.areaLandmark,
-      city: item.city,
-      state: item.state,
-      pinCode: item.pinCode,
-      facility1: item.facility1,
-      facility2: item.facility2,
-      facility3: item.facility3,
-      facility4: item.facility4,
+      StrudnetTran: item.StrudnetTran,
+      AdmissionDate: item.AdmissionDate,
+      ClassGenId: item.ClassGenId,
+      FirstName: item.FirstName,
+      LastName: item.LastName,
+      Gender: item.Gender,
+      DateOfBirth: item.DateOfBirth,
+      UID: item.UID,
+      BloodGroup: item.BloodGroup,
+      // P2
+      AddressLine1: item.AddressLine1,
+      Landmark: item.Landmark,
+      City: item.City,
+      State: item.State,
+      PinCode: item.PinCode,
+
+      // P3
+      facility1: FeeLsId[0] || '',
+      facility2: FeeLsId[1] || '',
+      facility3: FeeLsId[2] || '',
+      facility4: FeeLsId[3] || '',
       StudyMode: item.StudyMode,
+
+      // P4
       FatherName: item.FatherName,
       MotherName: item.MotherName,
-      ParentName: item.ParentName,
-      Relation: item.Relation,
-      Category: item.Category,
-      parent_phone: item.parent_phone,
-      other_phone: item.other_phone,
-      parent_email: item.parent_email,
+      GuardianName: item.GuardianName,
+      Religtion: item.Religtion,
+      Caste: item.Caste,
+      PrimaryContact: item.PrimaryContact,
+      SecondaryContact: item.SecondaryContact,
+      ParentsEmail: item.ParentsEmail,
+      // P5
       id_proof: item.id_proof,
       marksheet: item.marksheet,
       guardian_id_proof: item.guardian_id_proof,
@@ -100,42 +124,70 @@ export class AddStudentComponent {
   onFocused(e:any){}
   // Auto Complete -- CLOSE
 
+
+
+
+
+  ClassValue:any;
+  dataChange(a:any){
+    this.ClassValue = a.target.value;
+  }
+  facilities:any;
+
+  // Make StudentTranId
+  StudentTranId:any = "";
+ 
+
   onSubmit(){
-    if(!this.addStudentForm.valid){
-      alert("Please fill all the required fields.");
-      return;
-    }
+    // if(!this.addStudentForm.valid){
+    //   alert("Please fill all the required fields.");
+    //   return;
+    // }
+    
+    // this.StudentTranId = this.addStudentForm.value.FirstName.substring(0, 2).toUpperCase() + this.addStudentForm.value.ClassGenId.toString().toUpperCase() + Math.floor(1000 + Math.random() * 9000); 
+
+    // marged Facility
+    let facility1 = this.addStudentForm.value.facility1 ??'';
+    let facility2 = this.addStudentForm.value.facility2 ??'';
+    let facility3 = this.addStudentForm.value.facility3 ??'';
+    let facility4 = this.addStudentForm.value.facility4 ??'';
+    this.facilities = [facility1, facility2, facility3, facility4].filter(facility => facility !== '').join(', ').toString();  
+
+
+
+
     let model = {
-      AddmissionNumber: this.addStudentForm.value.AddmissionNumber,
-      dateOfAdmission: moment(this.addStudentForm.value.dateOfAdmission).format('YYYY-MM-DD'),
-      ClassId: this.addStudentForm.value.ClassId,
-      firstName: this.addStudentForm.value.firstName,
-      lastName: this.addStudentForm.value.lastName,
-      gender: this.addStudentForm.value,
-      dateOfBirth: moment(this.addStudentForm.value.dateOfBirth).format('YYYY-MM-DD'),
-      adharCard: this.addStudentForm.value.adharCard,
-      bloodGroup: this.addStudentForm.value.bloodGroup,
-      street: this.addStudentForm.value.street,
-      areaLandmark: this.addStudentForm.value.areaLandmark,
-      city: this.addStudentForm.value.city,
-      state: this.addStudentForm.value.state,
-      pinCode: this.addStudentForm.value.pinCode,
-      facility1: this.addStudentForm.value.facility1,
-      facility2: this.addStudentForm.value.facility2,
-      facility3: this.addStudentForm.value.facility3,
-      facility4: this.addStudentForm.value.facility4,
+      StrudnetTran: this.addStudentForm.value.StrudnetTran ?? Math.floor(1000 + Math.random() * 9000),
+      AdmissionDate: moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD'),
+      ClassGenId: this.ClassValue.toString(),
+      FirstName: this.addStudentForm.value.FirstName,
+      LastName: this.addStudentForm.value.LastName,
+      Gender: this.addStudentForm.value.Gender,
+      DateOfBirth: moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD'),
+      UID: this.addStudentForm.value.UID,
+      BloodGroup: this.addStudentForm.value.BloodGroup,
+
+      AddressLine1: this.addStudentForm.value.AddressLine1,
+      Landmark: this.addStudentForm.value.Landmark,
+      City: this.addStudentForm.value.City,
+      State: this.addStudentForm.value.State,
+      PinCode: this.addStudentForm.value.PinCode,
+
+      FeeLsId: this.facilities,
       StudyMode: this.addStudentForm.value.StudyMode,
+
       FatherName: this.addStudentForm.value.FatherName,
       MotherName: this.addStudentForm.value.MotherName,
-      ParentName: this.addStudentForm.value.ParentName,
-      Relation: this.addStudentForm.value.Relation,
-      Category: this.addStudentForm.value.Category,
-      parent_phone: this.addStudentForm.value.parent_phone,
-      other_phone: this.addStudentForm.value.other_phone,
-      parent_email: this.addStudentForm.value.parent_email,
+      GuardianName: this.addStudentForm.value.GuardianName,
+      Religtion: this.addStudentForm.value.Religtion,
+      Caste: this.addStudentForm.value.Caste,
+      PrimaryContact: this.addStudentForm.value.PrimaryContact,
+      SecondaryContact: this.addStudentForm.value.SecondaryContact,
+      ParentsEmail: this.addStudentForm.value.ParentsEmail,
+
       id_proof: this.addStudentForm.value.id_proof,
       marksheet: this.addStudentForm.value.marksheet,
-      guardian_id_proof: this.addStudentForm.value.guardian_id_proof
+      guardian_id_proof: this.addStudentForm.value.guardian_id_proof,
     };
     if(this.isButtonClicked){
       // Call API to add student
@@ -147,6 +199,14 @@ export class AddStudentComponent {
   }
   deleteApplication(){}
 
+
+  ClassLs:any;
+  Allot(){
+   this._configService.viewGenClass().subscribe(res=>{
+    this.ClassLs = res.data;
+   })
+
+  }
   clear(){
     this.addStudentForm.reset();
     this.isButtonClicked = true;

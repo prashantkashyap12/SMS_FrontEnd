@@ -16,7 +16,7 @@ import { ConfigService } from '../config.service';
 export class FeeTypeComponent {
 
   data = [];
-  keyword = 'name';
+  keyword = 'FeeName';
   isButton = true;
   FeeTypeForm!:FormGroup;
   constructor(private _configService:ConfigService, private _fb:FormBuilder){}
@@ -28,7 +28,8 @@ export class FeeTypeComponent {
   Init(){
     this.FeeTypeForm = this._fb.group({
       FeeName: ['', Validators.required],
-      FeeRemark: ['', Validators.required],
+      FeeReamrk: ['', Validators.required],
+      FeeId: 0
     })
   }
 
@@ -36,7 +37,8 @@ export class FeeTypeComponent {
   selectEvent(item:any){
     this.FeeTypeForm.patchValue({
       FeeName:item.FeeName,
-      FeeRemark:item.FeeRemark,
+      FeeReamrk:item.FeeReamrk,
+      FeeId:item.FeeId
     });
     this.isButton = false; 
   }
@@ -47,7 +49,7 @@ export class FeeTypeComponent {
   
   allot(){
     this._configService.viewFee().subscribe(res=>{
-      this.data = res;
+      this.data = res.data;
     }, err=>{
       alert("Error while fetching class data");
     });
@@ -61,7 +63,8 @@ export class FeeTypeComponent {
     }
     let model = {
       FeeName: this.FeeTypeForm.value.FeeName,
-      FeeRemark: this.FeeTypeForm.value.FeeRemark,
+      FeeReamrk: this.FeeTypeForm.value.FeeReamrk,
+      FeeId : this.FeeTypeForm.value.FeeId ?? 0
     }
     if(this.isButton){
       this._configService.addFee(model).subscribe({

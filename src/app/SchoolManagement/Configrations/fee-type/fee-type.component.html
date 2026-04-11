@@ -3,7 +3,7 @@
         <div class="row justify-content-center py-2 pt-3">
             <div class="col-xxl-5 col-xl-7 text-center">
                 <h3 class="fw-bold">
-                    Form Validation
+                    <!-- Form Validation -->
                 </h3>
             </div>
         </div>
@@ -36,14 +36,13 @@
                                         </ng-autocomplete>
 
                                         <ng-template #itemTemplate let-item>
-                                        <a [innerHTML]="item.name"></a>
+                                        <a [innerHTML]="item.FeeName"></a>
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
                                         <div [innerHTML]="notFound"></div>
                                         </ng-template>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -61,12 +60,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="validationCustom02" class="form-label">Fee Remark</label>
-                                <input type="text" class="form-control" id="validationCustom02" formControlName="FeeRemark" value="Doe" required>
+                                <input type="text" class="form-control" id="validationCustom02" formControlName="FeeReamrk" value="Doe" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 d-flex">
                                 <!-- Submit or update -->
                                 <button class="btn btn-primary" type="submit" (click)="onSubmit()" [ngClass]="isButton?'btn-primary':'btn-outline-secondary'">{{isButton?'Create':'Update'}}</button>&nbsp;
                                 <!-- Delete -->

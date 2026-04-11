@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { ConfigService } from '../config.service';
+import { max } from 'moment';
 
 @Component({
   selector: 'app-fee-stracture',
@@ -16,11 +17,11 @@ import { ConfigService } from '../config.service';
 export class FeeStractureComponent {
 
   data:any = [];
-  keyboard:string = 'name';
+  keyboard:string = 'FeeStractRemark';
   isButton:boolean = true;
   FeeStractForm!:FormGroup;
-  ClassId:any;
-  AcademicSessionId:any;
+  ClassIdRec:any = [];
+  FeeIdRec:any = [];
 
   constructor(private _configService:ConfigService, private _fb:FormBuilder){}
   ngOnInit(){
@@ -30,22 +31,24 @@ export class FeeStractureComponent {
 
   Init(){
     this.FeeStractForm = this._fb.group({
-      ClassId: ['',Validators.required],
-      AcademicSessionId: ['', Validators.required],
-      FeeAmount: ['', Validators.required],
-      LateFeePenalty: ['', Validators.required],
-      Remark: ['', Validators.required]
+      FeeStractureId: [0],
+      FeeId: [0, Validators.required],
+      ClassId: [0,Validators.required],
+      Fee_Amount: [0, Validators.required],
+      Fee_Panalty: [0, Validators.required],
+      FeeStractRemark: ['', Validators.required]
     })
   }
 
   // Auto Complete -- OPEN
   selectEvent(item:any){
     this.FeeStractForm.patchValue({
+      FeeId: item.FeeId,
       ClassId: item.ClassId,
-      AcademicSessionId: item.AcademicSessionId,
-      FeeAmount: item.FeeAmount,
-      LateFeePenalty: item.LateFeePenalty,
-      Remark: item.Remark
+      Fee_Amount: item.Fee_Amount,
+      Fee_Panalty: item.Fee_Panalty,
+      FeeStractRemark: item.FeeStractRemark,
+      FeeStractureId: item.FeeStractureId
     });
     this.isButton = false; 
   }
@@ -54,19 +57,21 @@ export class FeeStractureComponent {
   // Auto Complete -- CLOSE
 
   onSubmit(){
-    if(this.FeeStractForm.valid){
-      console.log(this.FeeStractForm.value);
+    if(!this.FeeStractForm.valid){
+      alert('Please Fill All Required Fields');
+      return;
     }
     let model = {
+      FeeId: this.FeeStractForm.value.FeeId,
       ClassId: this.FeeStractForm.value.ClassId,
-      AcademicSessionId: this.FeeStractForm.value.AcademicSessionId,
-      FeeAmount: this.FeeStractForm.value.FeeAmount,
-      LateFeePenalty: this.FeeStractForm.value.LateFeePenalty,
-      Remark: this.FeeStractForm.value.Remark
+      Fee_Amount: this.FeeStractForm.value.Fee_Amount,
+      Fee_Panalty: this.FeeStractForm.value.Fee_Panalty,
+      FeeStractRemark: this.FeeStractForm.value.FeeStractRemark,
+      FeeStractureId: this.FeeStractForm.value.FeeStractureId??0
     }
     if(this.isButton){
       this._configService.addFeeStract(model).subscribe(res=>{
-        console.log(res);
+        alert(res.message);          
         this.clear();
       }, err=>{
         console.log(err);
@@ -81,25 +86,27 @@ export class FeeStractureComponent {
     }
   }
 
-
+  dataVal(a:any){
+    console.log(a.target.value);
+  }
 
   allot(){
     this._configService.viewFeeStract().subscribe(res=>{
-      this.data = res;
+      this.data = res.data;
     })
-    // Get Class
-    this._configService.viewClass().subscribe(res=>{
-      this.ClassId = res;
+    // Get Generated Class
+    this._configService.viewGenClass().subscribe(res=>{
+      this.ClassIdRec = res.data;
     })
-    // Get Academic Session
-    this._configService.viewAcademic().subscribe(res=>{
-      this.AcademicSessionId = res;
+    // Get Fee Type
+    this._configService.viewFee().subscribe(res=>{
+      this.FeeIdRec = res.data;
     })
   }
 
   delete(){
-    this._configService.delFeeStract(this.FeeStractForm.value).subscribe(res=>{
-      console.log(res);
+    this._configService.delFeeStract(this.FeeStractForm.value.FeeStractureId).subscribe(res=>{
+      alert(res.message);
       this.clear();
     })
   }
@@ -109,6 +116,5 @@ export class FeeStractureComponent {
     this.isButton = true;
     this.allot();
   }
-
 
 }

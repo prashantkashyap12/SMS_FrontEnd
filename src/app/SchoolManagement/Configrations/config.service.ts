@@ -67,7 +67,7 @@ export class ConfigService {
     return this._http.patch(url, model);
   }
 
-  // GenClass (Class + Acadmic + Section)
+  // GenClass (Class + Acadmic + Section) -- done
   viewGenClass():Observable<any>{
     let url = this.baseUrls+'api/SMS_Config/ClassGenList';
     return this._http.get(url);
@@ -85,41 +85,40 @@ export class ConfigService {
     return this._http.patch(url, model);
   }
 
-  // Add Fee
+  // Add Fee  --  done
    viewFee():Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+'api/SMS_Config/FeeTypeList';
     return this._http.get(url);
   }
   addFee(model:any):Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+'api/SMS_Config/CreateFeeType';
     return this._http.post(url, model);
   }
   delFee(FeeId:any):Observable<any>{
-    let url = this.baseUrls;
-    return this._http.delete(url,FeeId);
+    let url = this.baseUrls+'api/SMS_Config/DeleteFeeType?FeeId='+FeeId;
+    return this._http.delete(url);
   }
   updateFee(model:any):Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+'api/SMS_Config/UpdateFeeType';
     return this._http.patch(url, model);
   }
 
-  // Fee Stracture 
+  // Fee Stracture -- done
   viewFeeStract():Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+''+`api/SMS_Config/FeeStractureList`;
     return this._http.get(url);
   }
   addFeeStract(model:any):Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+''+`api/SMS_Config/CreateFeeStracture`;
     return this._http.post(url, model);
   }
-  delFeeStract(FeeStractId:any):Observable<any>{
-    let url = this.baseUrls;
-    return this._http.delete(url,FeeStractId);
+  delFeeStract(FeeStractureId:any):Observable<any>{
+    let url = this.baseUrls+''+`api/SMS_Config/DeleteFeeStracture`;
+    return this._http.delete(url+'?FeeStractureId='+FeeStractureId);
   }
   updateFeeStract(model:any):Observable<any>{
-    let url = this.baseUrls;
+    let url = this.baseUrls+''+`api/SMS_Config/UpdateFeeStracture`;
     return this._http.patch(url, model);
   }
-
 
 }

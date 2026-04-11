@@ -22,7 +22,7 @@ export class CreateClassComponent {
   ClassIdLs:any=[]
   ClassSectionIdLs:any=[]
   AcademicSessionIdLs:any=[]
-  selectedSessionId:any = "Two Way DataBinding"
+  selectedSessionId:any = "XX/X/XXXX-XXXX";
 
   constructor(private _configService:ConfigService, private _Fb:FormBuilder){}
 
@@ -42,11 +42,43 @@ export class CreateClassComponent {
   }
 
   // Data Marged
-  dataBinding1(val:any,Id:any){
-    
+  margeAry:any = [];
+  dataBinding1(val:any){
+    this.margeAry[0] = val.target.value;
+    this.margeFun();
   }
-  dataBinding2(val:any,Id:any){}
-  dataBinding3(val:any,Id:any){}
+  dataBinding2(val:any){
+    this.margeAry[1] = val.target.value;
+    this.margeFun();
+  }
+  dataBinding3(val:any){
+    this.margeAry[2] = val.target.value;
+    this.margeFun();  
+  }
+
+  margeFun(){
+    if(this.margeAry.length === 3){
+      this.ClassIdLs.find((a:any)=>{
+        if(a.ClassId == this.margeAry[0]){
+          this.margeAry[0] = a.ClassNumber;
+        }}
+      );
+      this.ClassSectionIdLs.find((a:any)=>{
+        if(a.SectionId == this.margeAry[1]){
+          this.margeAry[1] = a.SectionNumber;
+        }}
+      );
+      this.AcademicSessionIdLs.find((a:any)=>{
+        if(a.SessionId == this.margeAry[2]){
+          this.margeAry[2] = a.SessionYear;
+        }}
+      );
+      this.GenClassForm.patchValue({
+        GenClassValue: this.margeAry[0] + '/' + this.margeAry[1] + '/' + this.margeAry[2]
+      });
+    }
+  }
+  
 
 
   //Data allot of classRoman, classSection, academicSession, 
@@ -91,7 +123,7 @@ export class CreateClassComponent {
 
   // Update or Submit Method
   onSubmit(){
-    if(!this.GenClassForm.valid){
+    if(!this.GenClassForm.valid && this.margeAry.length === 3){
       alert("Form Invalid Filled");
       return;
     }

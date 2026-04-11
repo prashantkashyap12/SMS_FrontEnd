@@ -3,7 +3,7 @@
         <div class="row justify-content-center py-2 pt-3">
             <div class="col-xxl-5 col-xl-7 text-center">
                 <h3 class="fw-bold">
-                    Student Fee Stracture
+                    <!-- Student Fee Stracture -->
                 </h3>
             </div>
         </div>
@@ -117,16 +117,16 @@
                                     <!-- Step 1: Student Info -->
                                     <div class="tab-pane fade show active" id="stuInfo">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 ">
                                                 <div class="mb-3">
                                                     <label class="form-label">Addmission Number</label>
-                                                    <input type="text" class="form-control" placeholder="Enter your full name" formControlName="AddmissionNumber" readonly required>
+                                                    <input type="text" class="form-control" placeholder="Enter your full name" formControlName="StrudnetTran"  [(ngModel)]="StudentTranId" readonly required> 
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Addmission</label>
-                                                    <input class="form-control" id="example-month" type="date" formControlName="dateOfAdmission">
+                                                    <input class="form-control" id="example-month" type="date" formControlName="AdmissionDate">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -135,10 +135,9 @@
                                                         <label class="col-form-label" style="padding-top: 0px;">Select Class with section</label>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <select class="form-select" name="ClassId" formControlName="ClassId" required>
+                                                        <select class="form-select" name="ClassId" formControlName="ClassGenId" (change)="dataChange($event)" required>
                                                             <option selected="">Select Class</option>
-                                                            <option value="I">1st</option>
-                                                            <option value="I">1st</option>
+                                                            <option *ngFor="let item of ClassLs" [value]="item.GenClassKey">{{item.GenClassValue}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -147,25 +146,25 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="Enter your first name" formControlName="firstName" required>
+                                                    <input type="text" class="form-control" placeholder="Enter your first name" formControlName="FirstName" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Enter your last name" formControlName="lastName" required>
+                                                    <input type="text" class="form-control" placeholder="Enter your last name" formControlName="LastName" required>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="mb-3">
                                                     <label class="form-label">Gender</label>
                                                     <div class="mb-2">
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio1" checked>
+                                                            <input class="form-check-input" type="radio" formControlName="Gender" value="male" id="inlineRadio1" checked>
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2">
+                                                            <input class="form-check-input" type="radio" formControlName="Gender" value="female" id="inlineRadio2">
                                                             <label class="form-check-label" for="inlineRadio2">Female</label>
                                                         </div>
                                                     </div>
@@ -174,19 +173,19 @@
                                             <div class="col-xl-3">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Birth</label>
-                                                    <input class="form-control" id="example-month" type="date" formControlName="dateOfBirth">
+                                                    <input class="form-control" id="example-month" type="date" formControlName="DateOfBirth">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Adhar Card</label>
-                                                    <input type="number" class="form-control" placeholder="Enter your AdharCard" formControlName="adharCard" required>
+                                                    <input type="number" class="form-control" placeholder="Enter your AdharCard" formControlName="UID"  maxlength="14" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="mb-3">
                                                     <label class="form-label">Blood Group</label>
-                                                    <input type="text" class="form-control" placeholder="Enter your Blood Group" formControlName="bloodGroup" required>
+                                                    <input type="text" class="form-control" placeholder="Enter your Blood Group" formControlName="BloodGroup" required>
                                                 </div>
                                             </div>
 
@@ -201,32 +200,32 @@
                                         <div class="row">
                                             <div class="col-xl-8">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Street Address</label>
-                                                    <input type="text" class="form-control" formControlName="street" placeholder="123 Main St" required>
+                                                    <label class="form-label">Address</label>
+                                                    <input type="text" class="form-control" formControlName="AddressLine1" placeholder="Full Address" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Area Landmark</label>
-                                                    <input type="text" class="form-control" formControlName="areaLandmark" placeholder="123 Main St" required>
+                                                    <input type="text" class="form-control" formControlName="Landmark" placeholder="Area Landmark" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">City</label>
-                                                    <input type="text" class="form-control" formControlName="city" placeholder="e.g., New York" required>
+                                                    <input type="text" class="form-control" formControlName="City" placeholder="City" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">State</label>
-                                                    <input type="text" class="form-control" formControlName="state" placeholder="e.g., California" required>
+                                                    <input type="text" class="form-control" formControlName="State" placeholder="State" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Pin Code</label>
-                                                    <input type="text" class="form-control" formControlName="pinCode" placeholder="e.g., 10001" required>
+                                                    <input type="text" class="form-control" formControlName="PinCode" placeholder="Pin Code" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -236,7 +235,6 @@
                                         </div>
                                     </div>
 
-
                                     <!-- Step 3: Course Info -->
                                     <div class="tab-pane fade" id="courseInfo">
                                         <div class="row">
@@ -245,7 +243,7 @@
                                                     <label class="form-label">Facilitys</label>
                                                     <div class="d-flex flex-wrap gap-4">
                                                         <div class="form-check form-check-primary mb-2 fs-lg">
-                                                            <input type="checkbox" class="form-check-input" formControlName="facility1" id="checkPrimary2" checked>
+                                                            <input type="checkbox" class="form-check-input" formControlName="facility1" id="checkPrimary2">
                                                             <label class="form-check-label" for="checkPrimary2">School Fee</label>
                                                         </div>
                                                         <div class="form-check form-check-primary mb-2 fs-lg">
@@ -282,6 +280,12 @@
                                     </div>
 
 
+
+
+
+
+
+
                                     <!-- Step 4: Parent Info -->
                                     <div class="tab-pane fade" id="parentInfo">
                                         <div class="row">
@@ -300,7 +304,7 @@
                                             <div class="col-xl-4">
                                                 <div class="mb-3">
                                                     <label class="form-label">Parent/Guardian Name</label>
-                                                    <input type="text" class="form-control" formControlName="ParentName" placeholder="e.g., John Doe" required>
+                                                    <input type="text" class="form-control" formControlName="GuardianName" placeholder="e.g., John Doe" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
@@ -308,19 +312,19 @@
                                                     <label class="form-label">Relation</label>
                                                     <div class="mb-2">
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Relation" id="inlineRadio11" value="option1" checked>
+                                                            <input class="form-check-input" type="radio" formControlName="Religtion" id="inlineRadio11" value="Hindu" >
                                                             <label class="form-check-label" for="inlineRadio11">Hindu</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Relation" id="inlineRadio12" value="option2">
+                                                            <input class="form-check-input" type="radio" formControlName="Religtion" id="inlineRadio12" value="Sikh">
                                                             <label class="form-check-label" for="inlineRadio12">Sikh</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Relation" id="inlineRadio13" value="option1" >
+                                                            <input class="form-check-input" type="radio" formControlName="Religtion" id="inlineRadio13" value="Crichine" >
                                                             <label class="form-check-label" for="inlineRadio13">Crichine</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Relation" id="inlineRadio14" value="option2">
+                                                            <input class="form-check-input" type="radio" formControlName="Religtion" id="inlineRadio14" value="Muslim">
                                                             <label class="form-check-label" for="inlineRadio14">Muslim</label>
                                                         </div>
                                                     </div>
@@ -331,20 +335,24 @@
                                                     <label class="form-label">Category</label>
                                                     <div class="mb-2">
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Category" id="inlineRadio31" value="option1" checked>
+                                                            <input class="form-check-input" type="radio" formControlName="Caste" id="inlineRadio31" value="GEN">
                                                             <label class="form-check-label" for="inlineRadio31">GEN</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Category" id="inlineRadio32" value="option2">
+                                                            <input class="form-check-input" type="radio" formControlName="Caste" id="inlineRadio32" value="OBC">
                                                             <label class="form-check-label" for="inlineRadio32">OBC</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Category" id="inlineRadio33" value="option3" >
+                                                            <input class="form-check-input" type="radio" formControlName="Caste" id="inlineRadio33" value="SC" >
                                                             <label class="form-check-label" for="inlineRadio33">SC</label>
                                                         </div>
                                                         <div class="form-check form-check-inline fs-lg">
-                                                            <input class="form-check-input" type="radio" formControlName="Category" id="inlineRadio34" value="option4">
+                                                            <input class="form-check-input" type="radio" formControlName="Caste" id="inlineRadio34" value="ST">
                                                             <label class="form-check-label" for="inlineRadio34">ST</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline fs-lg">
+                                                            <input class="form-check-input" type="radio" formControlName="Caste" id="inlineRadio35" value="Hindu">
+                                                            <label class="form-check-label" for="inlineRadio35">Hindu</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -352,19 +360,19 @@
                                             <div class="col-xl-3">
                                                 <div class="mb-3">
                                                     <label class="form-label">Parent Phone</label>
-                                                    <input type="tel" class="form-control" formControlName="parent_phone" placeholder="e.g., +1 555 123 4567" required>
+                                                    <input type="tel" class="form-control" formControlName="PrimaryContact" placeholder="e.g., +91 555 123 4567" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3">
                                                 <div class="mb-3">
                                                     <label class="form-label">Other Phone</label>
-                                                    <input type="tel" class="form-control" formControlName="other_phone" placeholder="e.g., +1 555 123 4567" required>
+                                                    <input type="tel" class="form-control" formControlName="SecondaryContact" placeholder="e.g., +91 555 123 4567" required>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Parent Email</label>
-                                                    <input type="email" class="form-control" formControlName="parent_email" placeholder="e.g., parent@example.com" required>
+                                                    <input type="email" class="form-control" formControlName="ParentsEmail" placeholder="e.g., parent@example.com" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -379,18 +387,18 @@
                                     <div class="tab-pane fade" id="documents">
                                         <div class="mb-3">
                                             <label class="form-label">Upload ID Proof</label>
-                                            <input type="file" class="form-control" formControlName="id_proof" required>
+                                            <input type="file" class="form-control" formControlName="AdharCardPath" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Upload Previous Marksheet</label>
-                                            <input type="file" class="form-control" formControlName="marksheet" required>
+                                            <input type="file" class="form-control" formControlName="LastYearReportCardPath" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Upload Guardian ID Proof</label>
-                                            <input type="file" class="form-control" formControlName="guardian_id_proof" required>
+                                            <input type="file" class="form-control" formControlName="GuardianIDPath" required>
                                         </div>
                                         <div class="d-flex justify-content-between mt-3">
-                                            <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Parent Info</button>
+                                            <!-- <button type="button" class="btn btn-secondary" data-wizard-prev>← Back: Parent Info</button> -->
                                             <button type="submit" class="btn btn-success" (click)="onSubmit()">{{isButtonClicked ? 'Submit Application' : 'Update Application'}}</button>
                                             <button type="submit" class="btn btn-danger" (click)="deleteApplication()">Delete Application</button>
 
