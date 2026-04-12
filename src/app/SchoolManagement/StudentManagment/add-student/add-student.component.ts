@@ -6,6 +6,9 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { StdManagService } from '../std-manag.service';
 import moment from 'moment';
 import { ConfigService } from '../../Configrations/config.service';
+import { urls } from '../../../common/common';
+// import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-add-student',
@@ -18,9 +21,10 @@ import { ConfigService } from '../../Configrations/config.service';
 export class AddStudentComponent {
 
   addStudentForm!: FormGroup;
-  isButtonClicked: boolean = false;
+  isButtonClicked: boolean = true;
   data: any[] = [];
-  keyboard: string = 'firstName';
+  keyboard: string = 'FirstName';
+  url:string = new urls().webApiUrl;
 
 
   constructor(private _stdManagService: StdManagService, private _configService: ConfigService, private _fb: FormBuilder) {}
@@ -33,43 +37,33 @@ export class AddStudentComponent {
     Init(){
       this.addStudentForm = this._fb.group({
         AdmissionId: [0],
-        // P1
         StrudnetTran: [''],
         AdmissionDate: [''],
         ClassGenId: [0],
         FirstName: [''],
         LastName: [''],
-        Gender: ['male'],
+        Gender: ['female'],
         DateOfBirth: [''],
         UID: [''],
         BloodGroup: [''],
-
-        // P2
         AddressLine1: [''],
         Landmark: [''],
         City: [''],
         State: [''],
         PinCode: [''],
-
-        // P3
         facility1: [true],
         facility2: [false],
         facility3: [false],
         facility4: [false],
         StudyMode: [''],
-
-
-        // P4
         FatherName: [''],
         MotherName: [''],
         GuardianName: [''],
-        Religtion: ['Hindu'],
-        Caste: ['Hindu'],
+        Religtion: ['Sikh'],
+        Caste: ['GEN'],
         PrimaryContact: [''],
         SecondaryContact: [''],
         ParentsEmail: [''],
-
-        // P5
         id_proof: [''],
         marksheet: [''],
         guardian_id_proof: ['']
@@ -78,127 +72,199 @@ export class AddStudentComponent {
 
 
     // Auto Complete -- OPEN
-  selectEvent(item:any){
-    let FeeLsId = item.FeeLsId.split(',').map((id: string) => id.trim());
-    this.addStudentForm.patchValue({
-      StrudnetTran: item.StrudnetTran,
-      AdmissionDate: item.AdmissionDate,
-      ClassGenId: item.ClassGenId,
-      FirstName: item.FirstName,
-      LastName: item.LastName,
-      Gender: item.Gender,
-      DateOfBirth: item.DateOfBirth,
-      UID: item.UID,
-      BloodGroup: item.BloodGroup,
-      // P2
-      AddressLine1: item.AddressLine1,
-      Landmark: item.Landmark,
-      City: item.City,
-      State: item.State,
-      PinCode: item.PinCode,
+    isOldStudent:any;
+    img1:any;
+    img2:any;
+    img3:any;
+    img4:any;
+    selectEvent(item:any){
+      if(item.ClassGenId){
+        this.ViewFasilityLs(item.ClassGenId); // view fasility
+        let FeeLsId = item.FeeLsId.split(',').map((id: string) => id.trim()); // Extrac Ls
+        console.log(FeeLsId);
+        // ImagePath
+        this.img1 = this.url+'wwwroot/'+item.StudnetPhoto;
+        this.img2 = this.url+'wwwroot/'+item.AdharCardPath;
+        this.img3 = this.url+'wwwroot/'+item.LastYearReportCardPath;
+        this.img4 = this.url+'wwwroot/'+item.GuardianIDPath;
 
-      // P3
-      facility1: FeeLsId[0] || '',
-      facility2: FeeLsId[1] || '',
-      facility3: FeeLsId[2] || '',
-      facility4: FeeLsId[3] || '',
-      StudyMode: item.StudyMode,
+        this.isOldStudent = item.AdmissionId;
 
-      // P4
-      FatherName: item.FatherName,
-      MotherName: item.MotherName,
-      GuardianName: item.GuardianName,
-      Religtion: item.Religtion,
-      Caste: item.Caste,
-      PrimaryContact: item.PrimaryContact,
-      SecondaryContact: item.SecondaryContact,
-      ParentsEmail: item.ParentsEmail,
-      // P5
-      id_proof: item.id_proof,
-      marksheet: item.marksheet,
-      guardian_id_proof: item.guardian_id_proof,
-    });
-    this.isButtonClicked = false; 
-  }
-  onChangeSearch(val: string) {}
-  onFocused(e:any){}
-  // Auto Complete -- CLOSE
+      }
+      
+      this.addStudentForm.patchValue({
+        StrudnetTran: item.AdmissionId,
+        AdmissionDate: moment(item.AdmissionDate).format('YYYY-MM-DD'),
+        DateOfBirth: moment(item.DateOfBirth).format('YYYY-MM-DD'),
+        ClassGenId: item.ClassGenId,
+        FirstName: item.FirstName,
+        LastName: item.LastName,
+        Gender: item.Gender,
+        UID: item.UID,
+        BloodGroup: item.BloodGroup,
+        // P2
+        AddressLine1: item.AddressLine1,
+        Landmark: item.Landmark,
+        City: item.City,
+        State: item.State,
+        PinCode: item.PinCode,
+
+        // P3
+
+        StudyMode: item.StudyMode,
+
+        // P4
+        FatherName: item.FatherName,
+        MotherName: item.MotherName,
+        GuardianName: item.GuardianName,
+        Religtion: item.Religtion,
+        Caste: item.Caste,
+        PrimaryContact: item.PrimaryContact,
+        SecondaryContact: item.SecondaryContact,
+        ParentsEmail: item.ParentsEmail,
+        // P5
+        id_proof: item.id_proof,
+        marksheet: item.marksheet,
+        guardian_id_proof: item.guardian_id_proof,
+      });
+      this.isButtonClicked = false; 
+    }
+    onChangeSearch(val: string) {}
+    onFocused(e:any){}
+    // Auto Complete -- CLOSE
 
 
 
 
-
+  // Class k selection par Fee Fess list and ClassId for submitForm
   ClassValue:any;
+  FacilityFee:any=[];
+  StudentTranId:any;
   dataChange(a:any){
-    this.ClassValue = a.target.value;
+    const select = a.target as HTMLSelectElement;
+    if(this.isOldStudent==undefined){
+      let data = select.options[select.selectedIndex].text;
+      this.StudentTranId = "Std.Sr1/"+data;
+    }
+    this.ViewFasilityLs(a.target.value);
   }
-  facilities:any;
+  ViewFasilityLs(a:any){
+    this.ClassValue = a;
+    this.FacilityFee =this.ClassLs.find((a:any)=>a.GenClassKey==this.ClassValue);
+    this._configService.viewFeeStract().subscribe(res=>{
+      let records = res.data.filter((a:any) => a.ClassId == this.FacilityFee.ClassId);
+      this.FacilityFee = records;
+    })
+  }
 
-  // Make StudentTranId
-  StudentTranId:any = "";
- 
+  // Get Fasilitys list for form
+  facilities: any = [];
+  facilitiesCheck(a: any, event: any) {
+    if (event.target.checked) {
+      this.facilities.push(a);
+    } else {
+      this.facilities = this.facilities.filter((x:any) => x !== a);
+    }
+    let datW = [...new Set(this.facilities)];
+    console.log(datW);
+  }
 
-  onSubmit(){
-    // if(!this.addStudentForm.valid){
-    //   alert("Please fill all the required fields.");
-    //   return;
-    // }
-    
-    // this.StudentTranId = this.addStudentForm.value.FirstName.substring(0, 2).toUpperCase() + this.addStudentForm.value.ClassGenId.toString().toUpperCase() + Math.floor(1000 + Math.random() * 9000); 
-
-    // marged Facility
-    let facility1 = this.addStudentForm.value.facility1 ??'';
-    let facility2 = this.addStudentForm.value.facility2 ??'';
-    let facility3 = this.addStudentForm.value.facility3 ??'';
-    let facility4 = this.addStudentForm.value.facility4 ??'';
-    this.facilities = [facility1, facility2, facility3, facility4].filter(facility => facility !== '').join(', ').toString();  
-
-
-
-
-    let model = {
-      StrudnetTran: this.addStudentForm.value.StrudnetTran ?? Math.floor(1000 + Math.random() * 9000),
-      AdmissionDate: moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD'),
-      ClassGenId: this.ClassValue.toString(),
-      FirstName: this.addStudentForm.value.FirstName,
-      LastName: this.addStudentForm.value.LastName,
-      Gender: this.addStudentForm.value.Gender,
-      DateOfBirth: moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD'),
-      UID: this.addStudentForm.value.UID,
-      BloodGroup: this.addStudentForm.value.BloodGroup,
-
-      AddressLine1: this.addStudentForm.value.AddressLine1,
-      Landmark: this.addStudentForm.value.Landmark,
-      City: this.addStudentForm.value.City,
-      State: this.addStudentForm.value.State,
-      PinCode: this.addStudentForm.value.PinCode,
-
-      FeeLsId: this.facilities,
-      StudyMode: this.addStudentForm.value.StudyMode,
-
-      FatherName: this.addStudentForm.value.FatherName,
-      MotherName: this.addStudentForm.value.MotherName,
-      GuardianName: this.addStudentForm.value.GuardianName,
-      Religtion: this.addStudentForm.value.Religtion,
-      Caste: this.addStudentForm.value.Caste,
-      PrimaryContact: this.addStudentForm.value.PrimaryContact,
-      SecondaryContact: this.addStudentForm.value.SecondaryContact,
-      ParentsEmail: this.addStudentForm.value.ParentsEmail,
-
-      id_proof: this.addStudentForm.value.id_proof,
-      marksheet: this.addStudentForm.value.marksheet,
-      guardian_id_proof: this.addStudentForm.value.guardian_id_proof,
-    };
-    if(this.isButtonClicked){
-      // Call API to add student
-      console.log("Adding student:", model);
-    }else{
-      // Call API to update student
-      console.log("Updating student:", model);
+  // Uploaded Files Memorys
+  StdPhoto:any;
+  StdId:any;
+  StdMarkSheet:any;
+  GuardinId:any;
+  fileUpdate(event:any){
+    const input = event.target as HTMLInputElement;
+    if(input.files && input.files.length > 0){
+      const file = input.files[0];
+       switch (input.name) {
+        case "StudnetPhoto":
+          this.StdPhoto = file;
+          break;
+        case "StudentIdCard":
+          this.StdId = file;
+          break;
+        case "StudentPreMark":
+          this.StdMarkSheet = file;
+          break;
+        case "GuardianId":
+          this.GuardinId = file;
+          break;
+        default:
+          alert("Unknown file uploaded");
+      }
     }
   }
-  deleteApplication(){}
 
+
+  onSubmit(){
+    const FileData = new FormData();
+    FileData.append("StrudnetTran", this.addStudentForm.value.StrudnetTran || this.StudentTranId);
+    // FileData.append("AdmissionDate", moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD'));
+    FileData.append("AdmissionDate", this.addStudentForm.value.AdmissionDate ? moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD') : "");
+    // FileData.append("ClassGenId", this.ClassValue??0);
+    FileData.append("ClassGenId", (this.ClassValue ?? 0).toString());
+    FileData.append("FirstName", this.addStudentForm.value.FirstName);
+    FileData.append("LastName", this.addStudentForm.value.LastName);
+    FileData.append("Gender", this.addStudentForm.value.Gender);
+    // FileData.append("DateOfBirth", moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD'));
+    FileData.append("DateOfBirth", this.addStudentForm.value.DateOfBirth ? moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD') : "");
+    // FileData.append("UID", this.addStudentForm.value.UID);
+    FileData.append("UID", this.addStudentForm.value.UID ? this.addStudentForm.value.UID.toString() : "0");
+    FileData.append("BloodGroup", this.addStudentForm.value.BloodGroup);
+    FileData.append("AddressLine1", this.addStudentForm.value.AddressLine1);
+    FileData.append("Landmark", this.addStudentForm.value.Landmark);
+    FileData.append("City", this.addStudentForm.value.City);
+    FileData.append("State", this.addStudentForm.value.State);
+    FileData.append("PinCode", this.addStudentForm.value.PinCode);
+    FileData.append("FeeLsId", this.facilities.join(","));
+    FileData.append("StudyMode", this.addStudentForm.value.StudyMode);
+    FileData.append("FatherName", this.addStudentForm.value.FatherName);
+    FileData.append("MotherName", this.addStudentForm.value.MotherName);
+    FileData.append("GuardianName", this.addStudentForm.value.GuardianName);
+    FileData.append("Religtion", this.addStudentForm.value.Religtion);
+    FileData.append("Caste", this.addStudentForm.value.Caste);
+    FileData.append("PrimaryContact", this.addStudentForm.value.PrimaryContact);
+    FileData.append("SecondaryContact", this.addStudentForm.value.SecondaryContact);
+    FileData.append("ParentsEmail", this.addStudentForm.value.ParentsEmail);
+    if (this.StdId) FileData.append("AdharCardPath", this.StdId);
+    if (this.StdMarkSheet) FileData.append("LastYearReportCardPath", this.StdMarkSheet);
+    if (this.GuardinId) FileData.append("GuardianIDPath", this.GuardinId);
+    if (this.StdPhoto) FileData.append("StudnetPhoto", this.StdPhoto); 
+    
+    if(this.isButtonClicked){
+      // Call API to add student
+      // TEST
+      FileData.forEach((value, key) => {
+        console.log(key, value);
+        if (value instanceof File) {
+          console.log("File Name:", value.name);
+        }
+      });
+      this._stdManagService.AddStudentComponent(FileData).subscribe(res=>{
+        alert(res.message);
+      },(err:any)=>{
+        alert(err.message);
+      })
+    }else{
+      // Call API to update student
+      this._stdManagService.UpdateStudentComponent(FileData).subscribe(res=>{
+        alert(res.message);
+      },(err:any)=>{
+        alert(err.message);
+      })
+    }
+  }
+
+  // Delete Studnet
+  deleteApplication(){
+    this._stdManagService.DeleteStudentComponent(this.isOldStudent).subscribe(res=>{
+      alert(res.message);
+    },(err:any)=>{
+      alert(err.message);
+    })
+  }
 
   ClassLs:any;
   Allot(){
@@ -206,6 +272,9 @@ export class AddStudentComponent {
     this.ClassLs = res.data;
    })
 
+   this._stdManagService.AllStudentRecord().subscribe(res=>{
+    this.data = res.data;
+   })
   }
   clear(){
     this.addStudentForm.reset();

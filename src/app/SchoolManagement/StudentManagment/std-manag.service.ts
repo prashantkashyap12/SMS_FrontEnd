@@ -14,31 +14,30 @@ export class StdManagService {
 
     // View All Student Record
    AllStudentRecord():Observable<any>{
-    let url = this.baseUrl+''+`api/SMS_Student/GetAllStudent`;
+    let url = this.baseUrl+''+`api/SMS_Config/Stdt_Get`;
     return this._http.get(url);
    }
+    
+    // Add Student Record 
+    AddStudentComponent(model:any):Observable<any>{
+      let url = this.baseUrl+''+`api/SMS_Config/Stdt_Add`;
+      return this._http.post(url,model);
+    }
    
     GetStudentById(id:number):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Student/GetStudentById/${id}`;
+      let url = this.baseUrl+''+`api/SMS_Config/GetStudentById/${id}`;
       return this._http.get(url);
     }
 
-    // Add Student Record
-    AddStudentComponent(model:any):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Student/CreateStudent`;
-      return this._http.post(url,model);
-    }
-
-
     // Update Student Record
     UpdateStudentComponent(model:any):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Student/UpdateStudent`;
-      return this._http.put(url,model);
+      let url = this.baseUrl+''+`api/SMS_Config/Stdt_Update`;
+      return this._http.patch(url,model);
      }
     
      // Delete Student Record
       DeleteStudentComponent(id:number):Observable<any>{
-        let url = this.baseUrl+''+`api/SMS_Student/DeleteStudent/${id}`;
+        let url = this.baseUrl+''+`api/SMS_Config/Stdt_Delete?AdmissionId=${id}`;
         return this._http.delete(url);
       }
 
