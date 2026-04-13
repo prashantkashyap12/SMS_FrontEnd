@@ -60,13 +60,13 @@
                         <div class="dropdown">
                             <button class="topbar-link fw-semibold" data-bs-toggle="dropdown" data-bs-offset="0,19"
                                     type="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../assets/images/flags/us.svg" alt="user-image" class="w-100 rounded me-2" height="18"
+                                <img src="../assets/images/flags/in.svg" alt="user-image" class="w-100 rounded me-2" height="18"
                                     id="selected-language-image">
                                 <span id="selected-language-code"> EN </span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="en" title="English">
-                                    <img src="../assets/images/flags/us.svg" alt="English" class="me-1 rounded" height="18"
+                                    <img src="../assets/images/flags/in.svg" alt="English" class="me-1 rounded" height="18"
                                         data-translator-image>
                                     <span class="align-middle">English</span>
                                 </a>
@@ -350,11 +350,7 @@
                 <!--- Sidenav Menu -->
                 <ul class="side-nav">
 
-                    @if(sideBar=="user"){ 
-                        <p>USER Login</p>
-                       
-                    }
-                   @else if(sideBar=="admin") {
+                     @if(sideBar!="admin") {
                         <li class="side-nav-item">
                             <a routerLink="/dashboard" class="side-nav-link">
                                 <span class="menu-icon"><i data-lucide="circle-gauge"></i></span>
@@ -447,11 +443,11 @@
                                             <span class="menu-text" data-lang="pages-pricing">Student View</span>
                                         </a>
                                     </li>
-                                    <li class="side-nav-item">
+                                    <!-- <li class="side-nav-item">
                                         <a routerLink="/student-doc" class="side-nav-link">
                                             <span class="menu-text" data-lang="pages-empty">Student Documnets</span>
                                         </a>
-                                    </li>
+                                    </li> -->
 
                                     <li class="side-nav-item">
                                         <a routerLink="/daily_attenduce" class="side-nav-link">
@@ -459,7 +455,8 @@
                                         </a>
                                     </li>
                                     <li class="side-nav-item">
-                                        <a routerLink="/check_attenduce" class="side-nav-link">
+                                        <!-- ViewIdCard -->
+                                        <a routerLink="/check_attenduce" class="side-nav-link"> 
                                             <span class="menu-text" data-lang="pages-timeline">View Attenduce (Class/Student)</span>
                                         </a>
                                     </li>

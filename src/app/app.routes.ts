@@ -26,13 +26,10 @@ export const routes: Routes = [
     {path:'student-doc', loadComponent:()=>import('./SchoolManagement/StudentManagment/student-doc/student-doc.component').then(m=>m.StudentDocComponent)},
     {path:'daily_attenduce', loadComponent:()=>import('./SchoolManagement/StudentManagment/attenduce-manger/attenduce-manger.component').then(m=>m.AttenduceMangerComponent)},
     {path:'check_attenduce', loadComponent:()=>import('./SchoolManagement/StudentManagment/view-attenduce/view-attenduce.component').then(m=>m.ViewAttenduceComponent)},
-
+    {path:'ViewIdCard/:id', loadComponent:()=>import('./SchoolManagement/StudentManagment/student-id-card/student-id-card.component').then(m=>m.StudentIdCardComponent)},
     {path:'ViewProfile/:id', loadComponent:()=>import('./SchoolManagement/StudentManagment/student-doc/student-doc.component').then(m=>m.StudentDocComponent)},
 
-
-
     // Fee Management
-    // (Student_mark_Fee_Earlier)
     {path:'manager-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-collection/fee-collection.component').then(m=>m.FeeCollectionComponent)},
     {path:'collection-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-collection/fee-collection.component').then(m=>m.FeeCollectionComponent)},
     {path:'print-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-slip/fee-slip.component').then(m=>m.FeeSlipComponent)},

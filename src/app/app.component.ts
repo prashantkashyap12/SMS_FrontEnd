@@ -29,14 +29,14 @@ export class AppComponent {
         console.log("token Extact =", Tokerole);
         this.sideBar = Tokerole.role;
         if(this.sideBar === 'admin'){
-          this._common.navigate(['/dashboard1']);
+          this._common.navigate(['/dashboard']);
           
         } else if(this.sideBar === 'user'){
-          this._common.navigate(['/dashboard1']);
+          this._common.navigate(['/dashboard']);
         }
       } else {
         this.islogin = false;
-        this._common.navigate(['/view-student']);
+        this._common.navigate(['/signin']);
         localStorage.clear();
       }
     }

@@ -12,7 +12,7 @@ import { ConfigService } from '../../Configrations/config.service';
 @Component({
   selector: 'app-student-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, AutocompleteLibModule, RouterLink, NgxPaginationModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, AutocompleteLibModule, RouterLink],
   providers:[StdManagService, ConfigService],
   templateUrl: './student-filter.component.html',
   styleUrl: './student-filter.component.css'

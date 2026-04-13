@@ -18,17 +18,17 @@ export class StdManagService {
     return this._http.get(url);
    }
     
-    // Add Student Record 
+   AllStudentRecord2(a:any):Observable<any>{
+    let url = this.baseUrl+''+`api/SMS_Config/Stdt_Get`;
+    return this._http.get(url,a);
+   }
+   
+   // Add Student Record 
     AddStudentComponent(model:any):Observable<any>{
       let url = this.baseUrl+''+`api/SMS_Config/Stdt_Add`;
       return this._http.post(url,model);
     }
    
-    GetStudentById(id:number):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Config/GetStudentById/${id}`;
-      return this._http.get(url);
-    }
-
     // Update Student Record
     UpdateStudentComponent(model:any):Observable<any>{
       let url = this.baseUrl+''+`api/SMS_Config/Stdt_Update`;

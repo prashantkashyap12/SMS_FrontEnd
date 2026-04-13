@@ -72,11 +72,16 @@
                                 </div>
                             </div>
                             <p class="text-muted mb-2">
-                                Daniel is a tech-savvy product manager with a track record of launching scalable SaaS products.
+                            For communication purposes, the primary contact number is {{data.PrimaryContact}}.
                             </p>
+                            <div style="display: flex;justify-content: space-between;">
                             <a [routerLink]="['/ViewProfile', data.AdmissionId]" class="icon-link icon-link-hover link-reset fw-medium">
                                 View Profile <i class="bi fs-16 ti ti-arrow-narrow-right"></i>
                             </a>
+                             <a [routerLink]="['/ViewIdCard', data.AdmissionId]" class="icon-link icon-link-hover link-reset fw-medium">
+                               <i class="bi fs-16 ti ti-arrow-narrow-left"></i> Fee Payment 
+                            </a>
+                            </div>
                         </div> <!-- end card-body -->
                         <div class="card-footer">
                             <div class="row text-center">
@@ -98,7 +103,7 @@
                  @else {
 
                 <div style="width: 100%; height: 70vh;display: flex;justify-content: center;align-items: center;">
-                        <h1>Record not found</h1>
+                        <!-- <h1>Record not found</h1> -->
                 </div>
                 }
 
