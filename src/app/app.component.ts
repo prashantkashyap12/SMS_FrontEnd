@@ -36,7 +36,7 @@ export class AppComponent {
         }
       } else {
         this.islogin = false;
-        this._common.navigate(['/add-student']);
+        this._common.navigate(['/view-student']);
         localStorage.clear();
       }
     }

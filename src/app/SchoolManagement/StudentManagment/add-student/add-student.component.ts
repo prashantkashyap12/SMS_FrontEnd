@@ -25,7 +25,7 @@ export class AddStudentComponent {
   data: any[] = [];
   keyboard: string = 'FirstName';
   url:string = new urls().webApiUrl;
-
+  Reset:any = false;
 
   constructor(private _stdManagService: StdManagService, private _configService: ConfigService, private _fb: FormBuilder) {}
 
@@ -39,7 +39,7 @@ export class AddStudentComponent {
         AdmissionId: [0],
         StrudnetTran: [''],
         AdmissionDate: [''],
-        ClassGenId: [0],
+        ClassGenId: [0,[Validators.required]],
         FirstName: [''],
         LastName: [''],
         Gender: ['female'],
@@ -51,10 +51,6 @@ export class AddStudentComponent {
         City: [''],
         State: [''],
         PinCode: [''],
-        facility1: [true],
-        facility2: [false],
-        facility3: [false],
-        facility4: [false],
         StudyMode: [''],
         FatherName: [''],
         MotherName: [''],
@@ -64,9 +60,11 @@ export class AddStudentComponent {
         PrimaryContact: [''],
         SecondaryContact: [''],
         ParentsEmail: [''],
-        id_proof: [''],
-        marksheet: [''],
-        guardian_id_proof: ['']
+        // uploadFils
+        StudnetPhoto:[''],
+        AdharCardPath: [''],
+        LastYearReportCardPath: [''],
+        GuardianIDPath: ['']
       });
     }
 
@@ -87,8 +85,14 @@ export class AddStudentComponent {
         this.img2 = this.url+'wwwroot/'+item.AdharCardPath;
         this.img3 = this.url+'wwwroot/'+item.LastYearReportCardPath;
         this.img4 = this.url+'wwwroot/'+item.GuardianIDPath;
-
+        this.isButtonClicked = false; 
         this.isOldStudent = item.AdmissionId;
+
+        // isMaindatryFile-
+        this.StdPhoto = item.StudnetPhoto;
+        this.StdId = item.AdharCardPath;
+        this.StdMarkSheet = item.LastYearReportCardPath;
+        this.GuardinId = item.GuardianIDPath;
 
       }
       
@@ -123,11 +127,11 @@ export class AddStudentComponent {
         SecondaryContact: item.SecondaryContact,
         ParentsEmail: item.ParentsEmail,
         // P5
-        id_proof: item.id_proof,
-        marksheet: item.marksheet,
-        guardian_id_proof: item.guardian_id_proof,
+        StudnetPhoto: item.StudnetPhoto,
+        AdharCardPath: item.AdharCardPath,
+        LastYearReportCardPath: item.LastYearReportCardPath,
+        GuardianIDPath:item.GuardianIDPath
       });
-      this.isButtonClicked = false; 
     }
     onChangeSearch(val: string) {}
     onFocused(e:any){}
@@ -144,7 +148,7 @@ export class AddStudentComponent {
     const select = a.target as HTMLSelectElement;
     if(this.isOldStudent==undefined){
       let data = select.options[select.selectedIndex].text;
-      this.StudentTranId = "Std.Sr1/"+data;
+      this.StudentTranId =  Math.floor(1000+Math.random()*9000)+data   // "Std.SrNumber1/"+data;
     }
     this.ViewFasilityLs(a.target.value);
   }
@@ -201,33 +205,29 @@ export class AddStudentComponent {
   onSubmit(){
     const FileData = new FormData();
     FileData.append("StrudnetTran", this.addStudentForm.value.StrudnetTran || this.StudentTranId);
-    // FileData.append("AdmissionDate", moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD'));
     FileData.append("AdmissionDate", this.addStudentForm.value.AdmissionDate ? moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD') : "");
-    // FileData.append("ClassGenId", this.ClassValue??0);
     FileData.append("ClassGenId", (this.ClassValue ?? 0).toString());
     FileData.append("FirstName", this.addStudentForm.value.FirstName);
     FileData.append("LastName", this.addStudentForm.value.LastName);
     FileData.append("Gender", this.addStudentForm.value.Gender);
-    // FileData.append("DateOfBirth", moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD'));
     FileData.append("DateOfBirth", this.addStudentForm.value.DateOfBirth ? moment(this.addStudentForm.value.DateOfBirth).format('YYYY-MM-DD') : "");
-    // FileData.append("UID", this.addStudentForm.value.UID);
     FileData.append("UID", this.addStudentForm.value.UID ? this.addStudentForm.value.UID.toString() : "0");
-    FileData.append("BloodGroup", this.addStudentForm.value.BloodGroup);
-    FileData.append("AddressLine1", this.addStudentForm.value.AddressLine1);
-    FileData.append("Landmark", this.addStudentForm.value.Landmark);
-    FileData.append("City", this.addStudentForm.value.City);
-    FileData.append("State", this.addStudentForm.value.State);
-    FileData.append("PinCode", this.addStudentForm.value.PinCode);
-    FileData.append("FeeLsId", this.facilities.join(","));
-    FileData.append("StudyMode", this.addStudentForm.value.StudyMode);
-    FileData.append("FatherName", this.addStudentForm.value.FatherName);
-    FileData.append("MotherName", this.addStudentForm.value.MotherName);
-    FileData.append("GuardianName", this.addStudentForm.value.GuardianName);
-    FileData.append("Religtion", this.addStudentForm.value.Religtion);
-    FileData.append("Caste", this.addStudentForm.value.Caste);
-    FileData.append("PrimaryContact", this.addStudentForm.value.PrimaryContact);
-    FileData.append("SecondaryContact", this.addStudentForm.value.SecondaryContact);
-    FileData.append("ParentsEmail", this.addStudentForm.value.ParentsEmail);
+    FileData.append("BloodGroup", this.addStudentForm.value.BloodGroup??"");
+    FileData.append("AddressLine1", this.addStudentForm.value.AddressLine1??"");
+    FileData.append("Landmark", this.addStudentForm.value.Landmark??"");
+    FileData.append("City", this.addStudentForm.value.City??"");
+    FileData.append("State", this.addStudentForm.value.State??"");
+    FileData.append("PinCode", this.addStudentForm.value.PinCode??"");
+    FileData.append("FeeLsId", this.facilities.join(",")??"");
+    FileData.append("StudyMode", this.addStudentForm.value.StudyMode??"");
+    FileData.append("FatherName", this.addStudentForm.value.FatherName??"");
+    FileData.append("MotherName", this.addStudentForm.value.MotherName??"");
+    FileData.append("GuardianName", this.addStudentForm.value.GuardianName??"");
+    FileData.append("Religtion", this.addStudentForm.value.Religtion??"");
+    FileData.append("Caste", this.addStudentForm.value.Caste??"");
+    FileData.append("PrimaryContact", this.addStudentForm.value.PrimaryContact??"");
+    FileData.append("SecondaryContact", this.addStudentForm.value.SecondaryContact??"");
+    FileData.append("ParentsEmail", this.addStudentForm.value.ParentsEmail??"");
     if (this.StdId) FileData.append("AdharCardPath", this.StdId);
     if (this.StdMarkSheet) FileData.append("LastYearReportCardPath", this.StdMarkSheet);
     if (this.GuardinId) FileData.append("GuardianIDPath", this.GuardinId);
@@ -244,13 +244,22 @@ export class AddStudentComponent {
       });
       this._stdManagService.AddStudentComponent(FileData).subscribe(res=>{
         alert(res.message);
+        this.clear()
       },(err:any)=>{
         alert(err.message);
       })
     }else{
       // Call API to update student
+        FileData.forEach((value, key) => {
+        console.log(key, value);
+        if (value instanceof File) {
+          console.log("File Name:", value.name);
+        }
+      });
+
       this._stdManagService.UpdateStudentComponent(FileData).subscribe(res=>{
         alert(res.message);
+        this.clear()
       },(err:any)=>{
         alert(err.message);
       })
@@ -261,6 +270,7 @@ export class AddStudentComponent {
   deleteApplication(){
     this._stdManagService.DeleteStudentComponent(this.isOldStudent).subscribe(res=>{
       alert(res.message);
+      this.clear();
     },(err:any)=>{
       alert(err.message);
     })
@@ -277,8 +287,14 @@ export class AddStudentComponent {
    })
   }
   clear(){
-    this.addStudentForm.reset();
+    this.Allot();
+    this.Init();
     this.isButtonClicked = true;
+    this.img1="";
+    this.img2="";
+    this.img3="";
+    this.img4="";
+    window.location.reload();
   }
 
 }
