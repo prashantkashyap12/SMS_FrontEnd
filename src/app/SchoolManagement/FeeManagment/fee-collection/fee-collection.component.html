@@ -1,1 +1,196 @@
-<p>fee-collection works!</p>
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row justify-content-center py-2 pt-3">
+            <div class="col-xxl-5 col-xl-7 text-center">
+                <h3 class="fw-bold">
+                    Fee Collection Modeule
+                </h3>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <form class="rounded border p-3" style="background-color: #fff;">
+
+                    <div class="row gap-3">
+                        <div class="col-lg-4">
+                            <div class="row g-lg-4 g-1">
+                                <div class="col-lg-4">
+                                    <label for="SearchInput" class="col-form-label" style="font-weight: 600;">Find Student</label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="app-search">
+                                        <input type="search" class="form-control" id="SearchInput" (keyup)="nameFilter($event)" placeholder="Search for something...">
+                                        <i class="ti ti-search fs-24 positionCustom"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-end">
+                                <!-- Designation Filter -->
+                                <div class="app-search">
+                                    <select class="form-select form-control my-1 my-md-0" style="padding-left: 18px;" (change)="classChange($event)">
+                                        <option selected>Select Class</option>
+                                        <option *ngFor="let data of this.AllClassRec" [value]="data.GenClassKey" >{{data.GenClassValue}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-xl-12">
+                    <div class="card">
+                    <div class="card-body px-4">
+                        <!-- Invoice Header -->
+                        <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                            <div class="auth-brand mb-0">
+                                <a href="index.html" class="logo-dark">
+                                    <span class="d-flex justify-content-center align-items-center gap-1">
+                                        <span class="avatar avatar-xs rounded-circle text-bg-dark">
+                                            <span class="avatar-title">
+                                                <img src="../../../../assets/images/users/user-10.jpg" class="avatar-lg rounded-circle" alt="rounded-circle">
+                                            </span>
+                                        </span>
+                                        <span class="logo-text text-body fw-bold fs-xl"> &nbsp;&nbsp;&nbsp;{{"Student Name"}}</span>
+                                    </span>
+                                </a>
+                                <a href="index.html" class="logo-light">
+                                    <span class="d-flex justify-content-center align-items-center gap-1">
+                                        <span class="avatar avatar-xs rounded-circle text-bg-dark">
+                                            <span class="avatar-title">
+                                                <i data-lucide="sparkles" class="fs-md"></i>
+                                            </span>
+                                        </span>
+                                        <span class="logo-text text-white fw-bold fs-xl">Vona</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-success-subtle text-success mb-2 fs-xs px-2 py-1">{{"Active"}}</span>
+                                <h4 class="fw-bold text-dark m-0">Enrollment No.- {{"#TNL-0125789"}}</h4>
+                            </div>
+                        </div>
+
+                        <!-- Invoice Info -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6 class="text-uppercase text-muted mb-2">Basic Information</h6>
+                                <p class="mb-1 fw-semibold">Address -</p>
+                                <p class="text-muted mb-1">512 Willow St,<br>Denver, CO - 80203</p>
+                                <p class="mb-1 fw-semibold">Contant -</p>
+                                <p class="text-muted mb-0">Phone: 303-892-3344</p>
+                                <div class="mt-4">
+                                    <h6 class="text-uppercase text-muted">Fee Stracture</h6>
+                                    <p class="mb-0 fw-medium">01 Jun 2025</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h6 class="text-uppercase text-muted mb-2">background Information</h6>
+                                <p class="mb-1 fw-semibold">Address -</p>
+                                <p class="text-muted mb-1">512 Willow St,<br>Denver, CO - 80203</p>
+                                <p class="mb-1 fw-semibold">Contant -</p>
+                                <p class="text-muted mb-0">Phone: 303-892-3344</p>
+                                <div class="mt-4">
+                                    <h6 class="text-uppercase text-muted">Due Date</h6>
+                                    <p class="mb-0 fw-medium">10 Jun 2025</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center rounded pt-2">
+                                <img src="../../../../assets/images/users/user-2.jpg" alt="profile" class="img-fluid" style="max-height: 140px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                        <div class="card-body">
+                        <form class="row g-3 needs-validation" >
+                            <div class="col-md-6">
+                                <div class="row ">
+                                    <div class="col-lg-12">
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <select class="form-select ">
+                                            <option selected="">Select Class</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row ">
+                                    <div class="col-lg-12">
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <select class="form-select ">
+                                            <option selected="">Select Fee</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                            <option value="I">1st</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="validationCustom01" class="form-label">Fee Amount</label>
+                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" required>
+                                <div class="valid-feedback">
+                                    Looks great!
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="validationCustom01" class="form-label">Late Fee Penalty </label>
+                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" required>
+                                <div class="valid-feedback">
+                                    Looks great!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom02" class="form-label">Remark</label>
+                                <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Comment..." required>
+                                <div class="valid-feedback">
+                                    Looks great!
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                    <label class="form-check-label" for="invalidCheck">
+                                        I agree to the terms and conditions
+                                    </label>
+                                    <div class="invalid-feedback">
+                                        You must agree before submitting.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

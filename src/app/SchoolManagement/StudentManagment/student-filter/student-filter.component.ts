@@ -42,8 +42,6 @@ export class StudentFilterComponent {
 
    data2:any;
    filterName:any;
-
-
    classChange(a:any){
     let id = a.target.value;
     this.data2 = this.data.filter((a:any)=>a.ClassGenId==id);
@@ -68,7 +66,6 @@ export class StudentFilterComponent {
         a.UID?.toString().includes(value) ||
         a.PrimaryContact?.toString().includes(value) ||
         a.SecondaryContact?.toString().includes(value)
-
       );
     });
   }

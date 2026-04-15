@@ -24,8 +24,9 @@
                         <div class="card">
                             <div class="card-body px-4">
                            
+                                @if(!isIdCard){
                                 <!-- Invoice format -->
-                                <!-- <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
                                     <div class="auth-brand mb-0">
                                         <a href="index.html" class="logo-dark">
                                             <span class="d-flex justify-content-center align-items-center gap-1">
@@ -162,8 +163,9 @@
                                     <p class="fw-semibold mb-3">Thank you for choosing Vona!</p>
                                     <img src="assets/images/sign.png" alt="Signature" height="32">
                                     <p class="text-muted fs-xxs fst-italic">Authorized Signature</p>
-                                </div> -->
-
+                                </div>
+                                
+                                }@else{
                                 <!-- Id Card -->
                                  <div class="card shadow-sm" style="max-width: 400px; margin: auto; border-radius: 15px; overflow: hidden;">
 
@@ -210,6 +212,8 @@
                                     </div>
 
                                 </div>
+                                }
+
                             </div>
                         </div>
 
