@@ -45,6 +45,37 @@
             <div class="col-xl-12">
                     <div class="card">
                     <div class="card-body px-4">
+                    @if(data2.length==0 && isList){
+                        <h4>Record Not Found</h4>
+                    }
+                    @if ( data2.length>0 && isList) {
+                        <!-- Students List -->
+                        <table id="single-select" class="table dt-responsive align-middle mb-0">
+                            <thead class="thead-sm text-uppercase fs-xxs">
+                                <tr>
+                                    <th>Sr.</th>
+                                    <th>Enrollment Number</th>
+                                    <th>Name</th>
+                                    <th>Father Name</th>
+                                    <th>Contact</th>
+                                    <th>Studey Mode</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr *ngFor="let data of this.data2, index as i">
+                                    <td>{{i+1}}</td>
+                                    <td>{{data.AdmissionId}}</td>
+                                    <td>{{data.FirstName}} {{data.LastName}}</td>
+                                    <td>{{data.FatherName}}</td>
+                                    <td>{{data.PrimaryContact}}</td>
+                                    <td>{{data.StudyMode}}</td>
+                                    <td><a (click)="OpenFee(data)"><button class="btn btn-primary btn-sm">Open Fee</button></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }@if(isFees) {
+
                         <!-- Invoice Header -->
                         <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
                             <div class="auth-brand mb-0">
@@ -52,10 +83,10 @@
                                     <span class="d-flex justify-content-center align-items-center gap-1">
                                         <span class="avatar avatar-xs rounded-circle text-bg-dark">
                                             <span class="avatar-title">
-                                                <img src="../../../../assets/images/users/user-10.jpg" class="avatar-lg rounded-circle" alt="rounded-circle">
+                                                <img [src]="this.url+this.viewProfile.StudnetPhoto" class="avatar-lg rounded-circle" alt="rounded-circle">
                                             </span>
                                         </span>
-                                        <span class="logo-text text-body fw-bold fs-xl"> &nbsp;&nbsp;&nbsp;{{"Student Name"}}</span>
+                                        <span class="logo-text text-body fw-bold fs-xl"> &nbsp;&nbsp;&nbsp;{{this.viewProfile.FirstName+" "+this.viewProfile.LastName}}</span>
                                     </span>
                                 </a>
                                 <a href="index.html" class="logo-light">
@@ -71,7 +102,7 @@
                             </div>
                             <div class="text-end">
                                 <span class="badge bg-success-subtle text-success mb-2 fs-xs px-2 py-1">{{"Active"}}</span>
-                                <h4 class="fw-bold text-dark m-0">Enrollment No.- {{"#TNL-0125789"}}</h4>
+                                <h4 class="fw-bold text-dark m-0">Enrollment No.- {{this.viewProfile.AdmissionId}}</h4>
                             </div>
                         </div>
 
@@ -79,41 +110,50 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h6 class="text-uppercase text-muted mb-2">Basic Information</h6>
-                                <p class="mb-1 fw-semibold">Address -</p>
-                                <p class="text-muted mb-1">512 Willow St,<br>Denver, CO - 80203</p>
+                                <p class="mb-1 fw-semibold">Adhar Card Number -</p>
+                                <p class="text-muted mb-1">{{viewProfile.UID}}</p>
+                                <p class="mb-1 fw-semibold">Date Of Birth-</p>
+                                <p class="text-muted mb-1">{{viewProfile.DateOfBirth}}</p>
+                                
                                 <p class="mb-1 fw-semibold">Contant -</p>
-                                <p class="text-muted mb-0">Phone: 303-892-3344</p>
+                                <p class="text-muted mb-0">Phone: {{viewProfile.PrimaryContact}}</p>
+                                <p class="text-muted mb-0">Phone: {{viewProfile.SecondaryContact}}</p>
+
                                 <div class="mt-4">
-                                    <h6 class="text-uppercase text-muted">Fee Stracture</h6>
-                                    <p class="mb-0 fw-medium">01 Jun 2025</p>
+                                    <h6 class="text-uppercase text-muted">Fee Due Date</h6>
+                                    <p class="mb-0 fw-medium">{{dueDate}}</p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <h6 class="text-uppercase text-muted mb-2">background Information</h6>
+                                <p class="mb-1 fw-semibold">Father Name - </p>
+                                <p class="text-muted mb-1"> {{viewProfile.FatherName}}</p>
                                 <p class="mb-1 fw-semibold">Address -</p>
-                                <p class="text-muted mb-1">512 Willow St,<br>Denver, CO - 80203</p>
+                                <p class="text-muted mb-1">{{viewProfile.AddressLine1}}<br>{{viewProfile.Landmark}} {{viewProfile.City}}</p>
                                 <p class="mb-1 fw-semibold">Contant -</p>
-                                <p class="text-muted mb-0">Phone: 303-892-3344</p>
+                                <p class="text-muted mb-0">Email: {{viewProfile.ParentsEmail}}</p>
                                 <div class="mt-4">
                                     <h6 class="text-uppercase text-muted">Due Date</h6>
-                                    <p class="mb-0 fw-medium">10 Jun 2025</p>
+                                    <p class="mb-0 fw-medium">{{viewProfile.ParentsEmail}}</p>
                                 </div>
                             </div>
                             <div class="col-md-4 text-center rounded pt-2">
-                                <img src="../../../../assets/images/users/user-2.jpg" alt="profile" class="img-fluid" style="max-height: 140px;">
+                                <img [src]="this.url+this.viewProfile.StudnetPhoto" alt="profile" class="img-fluid" style="max-height: 140px;border: 1px solid cadetblue;padding:4px;border-radius:inherit">
                             </div>
                         </div>
+                     }
                     </div>
                 </div>
             </div>
         </div>
 
+        @if (isFees) {
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                        <div class="card-body">
-                        <form class="row g-3 needs-validation" >
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" [formGroup]="FeeDepo">
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">
@@ -190,6 +230,7 @@
                 </div>
             </div>
         </div>
+        }
 
     </div>
 

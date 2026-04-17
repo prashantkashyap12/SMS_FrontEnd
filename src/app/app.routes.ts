@@ -5,8 +5,7 @@ export const routes: Routes = [
     {path: 'signup', loadComponent: () => import('./userAuth/signup/signup.component').then(m => m.SignupComponent)},
     {path: 'forget-password', loadComponent: () => import('./userAuth/forget/forget.component').then(m => m.ForgetComponent)},
     {path: 'verify', loadComponent: () => import('./userAuth/verify/verify.component').then(m => m.VerifyComponent)},
-
-     {path: 'dashboard', loadComponent: () => import('./SchoolManagement/dashboard/dashboard.component').then(m => m.DashboardComponent)},
+    {path: 'dashboard', loadComponent: () => import('./SchoolManagement/dashboard/dashboard.component').then(m => m.DashboardComponent)},
 
     // Configration
     {path:'class', loadComponent:()=> import('./SchoolManagement/Configrations/class/class.component').then(m=>m.ClassComponent)},
@@ -30,8 +29,11 @@ export const routes: Routes = [
     {path:'ViewProfile/:id', loadComponent:()=>import('./SchoolManagement/StudentManagment/student-doc/student-doc.component').then(m=>m.StudentDocComponent)},
 
     // Fee Management
-    {path:'manager-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-collection/fee-collection.component').then(m=>m.FeeCollectionComponent)},
     {path:'collection-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-collection/fee-collection.component').then(m=>m.FeeCollectionComponent)},
+    {path:'manager-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-manager/fee-manager.component').then(m=>m.FeeManagerComponent)},
     {path:'print-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-slip/fee-slip.component').then(m=>m.FeeSlipComponent)},
     
+    
+
+
     ];

@@ -25,7 +25,6 @@ export class StudentFilterComponent {
   }
   ngOnInit(){ 
     this.allot();
-
   }
 
    AllClassRec:any
