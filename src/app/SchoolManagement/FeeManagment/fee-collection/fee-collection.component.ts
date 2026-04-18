@@ -36,7 +36,6 @@ export class FeeCollectionComponent {
     this._studentManager.AllStudentRecord().subscribe(res=>{
     this.data = res.data;
     })
-
     this._cofigService.viewGenClass().subscribe(res=>{
       this.AllClassRec = res.data;
     })
@@ -83,7 +82,7 @@ export class FeeCollectionComponent {
     this.isFees = true;
     this.isList = false;
     this.viewProfile = a;
-    alert(this.viewProfile);
+    this.getFeeLs(this.viewProfile.FeeLsId);
   }
 
   // Fee Management -- open
@@ -92,7 +91,57 @@ export class FeeCollectionComponent {
     this._fb.group({
       
     })
+  }
 
+  dataFeeRec:any = [];
+  feeValue:any = [];
+  feeStract:any = [];
+  getFeeLs(ab:any){
+    this._cofigService.viewFee().subscribe(res=>{
+      this.dataFeeRec = res.data;
+      let abs = ab.split(',');
+      this.feeValue = this.dataFeeRec.filter((b: any) =>
+        abs.includes(String(b.FeeId))
+      );
+      console.log("Fee Value"+this.feeValue);
+    })
+    this._cofigService.viewFeeStract().subscribe(res=>{
+      this.feeStract = res.data;
+      console.log("Fee Structure "+this.feeStract);
+    })
+
+    console.log(this.viewProfile.ClassGenId);
+    setTimeout(() => {
+      this.feeValue.forEach((a: any) => {
+        let stract = this.feeStract.filter((b: any) => b.FeeId == a.FeeId);
+        a['stracture'] = stract;
+      });
+      console.log("Final Touch"+this.feeValue);
+    }, 2000);
+    
 
   }
+
+  FeeMonth(a:any){
+
+  }
+
+
+  // transactionId:any  // Generate Transaction Id last Id Online ?? ''
+  // studTran:any       // Self Genenrated 
+  // receipt:any  = "By API Gen"      // d Auto Genenrated by API
+  // tranDate:any = moment(new Date()).format("YYYY-MM-DD")     // d Self Genenrated
+  // feeMonth:any       // d User Input
+  // feeAmount:any ="101"; // User Input
+  // discount:any    // d
+  // lateCharges:any  // d
+  // totalPay:any   // d
+  // dueWallet:any
+  // tranMode:any    
+  // grandTotal:any  // d
+  // remark:any
+
+
+
+
 }
