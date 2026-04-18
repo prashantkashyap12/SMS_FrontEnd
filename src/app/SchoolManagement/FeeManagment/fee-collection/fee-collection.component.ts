@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StdManagService } from '../../StudentManagment/std-manag.service';
 import { ConfigService } from '../../Configrations/config.service';
 import { urls } from '../../../common/common';
 import moment from 'moment';
+import { FeeManagerService } from '../fee-manager.service';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-fee-collection',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, CommonModule],
-  providers:[StdManagService, ConfigService],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, CommonModule, CommonModule],
+  providers:[StdManagService, ConfigService, FeeManagerService],
   templateUrl: './fee-collection.component.html',
   styleUrl: './fee-collection.component.css'
 })
@@ -23,12 +25,25 @@ export class FeeCollectionComponent {
   isFees:boolean = false;
   public url = new urls().webApiUrl+'wwwroot/';
 
+  
+  receipt:any;          // d Auto Genenrated by API
+  tranDate:any = moment(new Date()).format("YYYY-MM-DD")     // d Self Genenrated
+  // feeMonth:any       // d User Input
+  // feeAmount:any ="101"; // User Input
+  discount:any    // d
+  // lateCharges:any  // d
+  // totalPay:any   // d
+  // dueWallet:any
+  // tranMode:any    
+  grandTotal:any  // d
+  // remark:any
+
   ngOnInit(){
     this.Allot();
     this.Init()
   }
   
-  constructor(private _studentManager:StdManagService, private _cofigService:ConfigService, private _fb:FormBuilder ){
+  constructor(private _studentManager:StdManagService, private _cofigService:ConfigService, private _fb:FormBuilder, private _feeManager:FeeManagerService ){
   }
 
   // Get Data
@@ -82,16 +97,31 @@ export class FeeCollectionComponent {
     this.isFees = true;
     this.isList = false;
     this.viewProfile = a;
+    this.walletget(this.viewProfile.AdmissionId);
     this.getFeeLs(this.viewProfile.FeeLsId);
   }
 
   // Fee Management -- open
   FeeDepo!:FormGroup;
   Init(){
-    this._fb.group({
-      
+    this.FeeDepo = this._fb.group({
+      TransactionId: [''],
+      StudTran: [''],     //
+      Receipt: [''],       // 
+      TranDate: [''],      //
+      FeeMonth: [''],      //
+      FeeAmount: [''],     //
+      Discount: ['0'],      //
+      DueDate: [''],       // 
+      LateCharges: [''],  //
+      TotalPay: [''],      //
+      DueWallet: [''],     //
+      TranMode: [''],      //
+      Remark: ['-'],        //
     })
   }
+
+
 
   dataFeeRec:any = [];
   feeValue:any = [];
@@ -119,28 +149,95 @@ export class FeeCollectionComponent {
       console.log("Final Touch"+this.feeValue);
     }, 2000);
     
-
+    
+    
   }
 
+  // Wallet Get
+  Getwallet:any = [];
+  walletget(AdmissionId:any){
+    this._feeManager.getFeeStructure(AdmissionId).subscribe(res=>{
+      let lastRec = res.data;
+      this.Getwallet = lastRec.DueWallet ?? 0;
+    })
+  }
+
+   totalAmount = 0;
+   totalPenalty = 0;
   FeeMonth(a:any){
+    console.log(a.target.value);
+    this._feeManager.getRecipit().subscribe(res=>{
+      console.log(res.data); 
+      this.receipt = "ISHWARIPRASAD_"+res.data.toString();
+    })
+    this.FeeCalc();
+  }
+
+  baseTotal:any;
+  FeeCalc(){
+    // Total Value Extraction
+    let totalPenalty = 0;
+    this.feeValue.forEach((item: any) => {
+        item.stracture.forEach((s: any) => {
+            this.totalAmount += Number(s.Fee_Amount);
+            totalPenalty += Number(s.Fee_Panalty);
+        });
+    });
+    this.dueDate;
+    this.tranDate;
+    if(this.dueDate < this.tranDate){
+      this.totalPenalty += totalPenalty;
+    }
+    this.grandTotal = this.totalAmount + this.totalPenalty;
+  }
+
+  discountCalc(event:any){
+    setTimeout(()=>{
+      const discountAmount = (this.grandTotal/100) * Number(event.target.value);
+      this.grandTotal = this.grandTotal - discountAmount;
+    },2000)
+  }
+
+
+  // Payment Type - Online/Offline
+  PaymentTypeValue:any;
+  PaymentType(event:any){
+    console.log(event.target.value);
+    console.log(this.FeeDepo.value);
+    this.FeeDepo.value.TransactionId = event.target.value;
 
   }
 
 
-  // transactionId:any  // Generate Transaction Id last Id Online ?? ''
-  // studTran:any       // Self Genenrated 
-  // receipt:any  = "By API Gen"      // d Auto Genenrated by API
-  // tranDate:any = moment(new Date()).format("YYYY-MM-DD")     // d Self Genenrated
-  // feeMonth:any       // d User Input
-  // feeAmount:any ="101"; // User Input
-  // discount:any    // d
-  // lateCharges:any  // d
-  // totalPay:any   // d
-  // dueWallet:any
-  // tranMode:any    
-  // grandTotal:any  // d
-  // remark:any
-
+  onSubmit(){
+    let model = {
+      TransactionId: this.FeeDepo.value.TransactionId ?? '',
+      StudTran: this.FeeDepo.value.StudTran ?? '-',
+      Receipt: this.FeeDepo.value.Receipt ?? '-',
+      TranDate: this.FeeDepo.value.TranDate ?? '-',
+      FeeMonth: this.FeeDepo.value.FeeMonth ?? '-',
+      FeeAmount: String(this.FeeDepo.value.FeeAmount) ?? '-',
+      Discount: String(this.FeeDepo.value.Discount) ?? '0',
+      DueDate: this.FeeDepo.value.DueDate ?? '-',
+      LateCharges: String(this.FeeDepo.value.LateCharges) ?? '-',
+      TotalPay: String(this.FeeDepo.value.TotalPay) ?? '-',
+      DueWallet: String(this.FeeDepo.value.DueWallet) ?? '-',
+      TranMode: this.FeeDepo.value.TranMode ?? '-',
+      GrandTotal: this.FeeDepo.value.Remark ?? '-',
+    }
+    // if(this.FeeDepo.valid){
+      this._feeManager.FeeCollection(model).subscribe(res=>{
+        if(res.state){
+          alert("Fee Collected Successfully");
+          this.ngOnInit();
+          window.location.reload();
+        }
+        else{
+          alert(res.message);
+        }
+      })
+    // }
+  }
 
 
 
