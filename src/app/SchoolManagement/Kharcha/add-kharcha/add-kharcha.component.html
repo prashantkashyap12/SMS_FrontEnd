@@ -1,0 +1,89 @@
+
+
+<div class="bg-default p-3">
+     <ng-autocomplete 
+    [data]="data"
+    [searchKeyword]="keyword"
+    placeholder="Select Class"
+    (selected)='selectEvent($event)'
+    (inputChanged)='onChangeSearch($event)'
+    (inputFocused)='onFocused($event)'
+    [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate">                                 
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.TranType"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+    </ng-template>
+</div>
+
+<form [formGroup]="Kharcha" class="p-3">
+    
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Kharcha Date</label>
+        <input type="Date" formControlName="Date" class="form-control" id="exampleInputPassword1" placeholder="Enter Kharcha Date">
+    </div>
+
+    <!-- Add Advanece  -->
+    <div class="form-group">
+        <label for="exampleInputPassword1">Receipt Number</label>
+        <input type="text" formControlName="ReceiptNumber" class="form-control" id="exampleInputPassword1" placeholder="Enter Receipt Number">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">CustomerId</label>
+        <input type="text" formControlName="CustomerId" class="form-control" id="exampleInputPassword1" placeholder="Enter CustomerId">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Customer Name</label>
+        <input type="text" formControlName="CustomerName" class="form-control" id="exampleInputPassword1" placeholder="Enter Customer Name">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Customer Contact</label>
+        <input type="text" formControlName="CustomerContact" class="form-control" id="exampleInputPassword1" placeholder="Enter Customer Contact">
+    </div>
+    <!-- Add Advanece  -->
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Kharcha Name</label>
+        <select formControlName="TranType" class="form-control">
+            <option value="DEBIT">Debit</option>
+            <option value="CREDIT">Credit</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Kharcha Type of Expense</label>
+        <input type="text" formControlName="CategorySelect" class="form-control" id="exampleInputPassword1" placeholder="Enter Kharcha Amount">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Discription</label>
+        <input type="text" formControlName="Discription" class="form-control" id="exampleInputPassword1" placeholder="Enter Discription">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Amount</label>
+        <input type="string" formControlName="GrandTotal" class="form-control" id="exampleInputPassword1" placeholder="Enter Amount">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Payment Amount</label>
+        <input type="text" formControlName="CurrentPay" class="form-control" id="exampleInputPassword1" placeholder="Enter Payment Amount">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Payment Due</label>
+        <input type="text" formControlName="CurrentDue" class="form-control" id="exampleInputPassword1" placeholder="Enter Payment Due">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Wallet Balance</label>
+        <input type="text" formControlName="Balance" class="form-control" id="exampleInputPassword1" placeholder="Enter Wallet Balance                ">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Payment Mode</label>
+        <input type="text" formControlName="paymentMode" class="form-control" id="exampleInputPassword1" placeholder="Enter Payment Mode">
+    </div>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary">{{isButton ? 'Submit' : 'Update'}}</button>
+</form>

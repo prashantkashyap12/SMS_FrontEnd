@@ -1,0 +1,34 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sr.No</th>
+      <th>Date</th>
+      <th>Transaction Type</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Grand Total</th>
+      <th>Current Payment</th>
+      <th>Current Due</th>
+      <th>Balance</th>
+      <th>Payment Mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of this.data">
+      <td>{{data.TranId}}</td>
+      <td>{{data.Date}}</td>
+      <td>{{data.ReceiptNumber}}</td>
+      <td>{{data.CustomerId}}</td>
+      <td>{{data.CustomerName}}</td>
+      <td>{{data.CustomerContact}}</td>
+      <td>{{data.TranType}}</td>
+      <td>{{data.CategorySelect}}</td>
+      <td>{{data.Discription}}</td>
+      <td>{{data.GrandTotal}}</td>
+      <td>{{data.CurrentPay}}</td>
+      <td>{{data.CurrentDue}}</td>
+      <td>{{data.Balance}}</td>
+      <td>{{data.paymentMode}}</td>
+    </tr>
+  </tbody>
+</table>
