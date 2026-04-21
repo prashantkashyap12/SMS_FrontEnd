@@ -25,8 +25,92 @@
                     </div>
 
                     <div class="card-body">
-                        
-                        <!-- <form class="row g-3 needs-validation" >
+
+                        <div *ngIf="this.techerData.length > 0" class="alert alert-info" role="alert">
+                            <div *ngFor="let rec of this.techerData">
+                                <p>Teacher Name: {{rec.Name}}</p>
+                                <h5 class="alert-heading">Name: {{rec.Name}}</h5>
+                                <p>Contact: {{rec.Contact}}</p>
+                                <p>Subject: {{rec.SubjectTeacher}}</p>
+                            </div>
+                        </div>
+
+                        <div *ngIf="StudnetList && StudnetList.length > 0">
+                            <h3>Students Attendance for Class: {{ selectedClass }}</h3>
+
+                            <form [formGroup]="attendanceForm" (ngSubmit)="submitAttendance()">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                        <th>Roll No</th>
+                                        <th>Name</th>
+                                        <th>Father Name (Contact)</th>
+                                        <th>Status</th>
+                                        <th>Remarks</th>
+                                        </tr>   
+                                    </thead>
+                                    <tbody formArrayName="students">
+                                        <tr *ngFor="let student of StudnetList; let i = index" [formGroupName]="i">
+                                            <td><input type="text" [value]="student.AdmissionId" formControlName="RollNumber" class="form-control"></td>
+                                            <td>{{ student.FirstName }} {{ student.LastName }}</td>
+                                            <td>{{ student.FatherName }} ({{ student.PrimaryContact }})</td>
+                                            <td>
+                                                <select class="form-select" formControlName="StatusA" required>
+                                                    <option value="" disabled selected>Select</option>
+                                                    <option value="P">Present</option>
+                                                    <option value="A">Absent</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" placeholder="Enter Comment(If Absence too)..." formControlName="Note">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-success">Submit Attendance</button>
+                            </form>
+                            </div>
+
+                            <div *ngIf="!StudnetList || StudnetList.length === 0">
+                            <p>No students found for this class.</p>
+                            </div>
+
+
+                        <!-- <div *ngIf="this.StudnetList.length > 0">
+                            <h3>Students List of Class: {{this.selectedClass}}</h3>
+                            <form class="row g-3 needs-validation" >
+                                <div class="row g-3">
+                                    <div class="col-md-6" *ngFor="let rec of this.StudnetList">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="card-text">Roll No: {{rec.AdmissionId}}</p>
+                                                <h5 class="card-title">Name: {{rec.FirstName}} {{rec.LastName}}</h5>
+                                                <p class="card-text">Class: {{selectedClass}}</p>
+                                                <p class="card-text">Father Name: {{rec.FatherName}} ({{rec.PrimaryContact}})</p>
+                                                <div class="col-12">
+                                                    <select class="form-select" formControlName="Status" (change)="Attenduce($event)">
+                                                        <option selected="">Select Status</option>
+                                                        <option value="P">Present</option>
+                                                        <option value="A">Absent</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 pt-2" *ngIf="isAbsent">
+                                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Comment(Reasion)..." required>
+                                                    <div class="valid-feedback">
+                                                        Looks great!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                         -->
+                       
+                       
+                       
+                         <!-- <form class="row g-3 needs-validation" >
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">

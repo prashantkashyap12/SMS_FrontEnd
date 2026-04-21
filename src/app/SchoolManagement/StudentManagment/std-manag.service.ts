@@ -31,15 +31,22 @@ export class StdManagService {
    
     // Update Student Record
     UpdateStudentComponent(model:any):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Config/Stdt_Update`;
-      return this._http.patch(url,model);
-     }
-    
+    let url = this.baseUrl+''+`api/SMS_Config/Stdt_Update`;
+    return this._http.patch(url,model);
+    }
+  
      // Delete Student Record
-      DeleteStudentComponent(id:number):Observable<any>{
-        let url = this.baseUrl+''+`api/SMS_Config/Stdt_Delete?AdmissionId=${id}`;
-        return this._http.delete(url);
-      }
+    DeleteStudentComponent(id:number):Observable<any>{
+      let url = this.baseUrl+''+`api/SMS_Config/Stdt_Delete?AdmissionId=${id}`;
+      return this._http.delete(url);
+    }
+
+
+    // Attendance Record
+    AddAttendanceRecord(model:any):Observable<any>{
+      let url = this.baseUrl+''+`api/SMS_Config/SubmitAttendance`;
+      return this._http.post(url,model);
+    }
 
 
 

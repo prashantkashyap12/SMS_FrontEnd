@@ -3,69 +3,71 @@
         <div class="row justify-content-center py-2 pt-3">
             <div class="col-xxl-5 col-xl-7 text-center">
                 <h3 class="fw-bold">
-                    Student Fee Stracture
+                    Student Attenduce List
                 </h3>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
-                    <div class="card-header justify-content-between">
-                        <h5 class="card-title">Create Fee Stracture</h5>
-                        <div class="row g-lg-4 g-2">
-                            <div class="col-lg-4">
-                                <label for="SearchInput" class="col-form-label">Search Student</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="app-search">
-                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
-                                    <i class="ti ti-search fs-24 positionCustom"></i>
+                    <div class="card-body">
+
+                        <div class="bg-light p-2">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Attenduce View</label>
+                                        <div class="mb-2 d-flex justify-content-center">
+                                            <div class="form-check form-check-inline fs-lg">
+                                                <input class="form-check-input" type="radio" Name="Gender" checked (click)="formChange('Month')" value="Month" id="inlineRadio1" >
+                                                <label class="form-check-label" for="inlineRadio1">Monthly Wise</label>
+                                            </div>
+                                            <div class="form-check form-check-inline fs-lg">
+                                                <input class="form-check-input" type="radio" Name="Gender" (click)="formChange('Day')" value="Day" id="inlineRadio2">
+                                                <label class="form-check-label" for="inlineRadio2">Day Wise</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card-body">
-                        <form class="row g-3 needs-validation" >
+                        @if(isDayWise){
+                        <form class="row g-3 needs-validation">
                             <div class="col-md-6">
                                 <div class="row ">
-                                    <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <select class="form-select ">
-                                            <option selected="">Select Class</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                        </select>
+                                    <div class="col-lg-12 pt-2">
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Attenduce Date</label>
+                                         <input type="date" class="form-control" id="validationCustom01" placeholder="₹" required>
+                                        <div class="valid-feedback">
+                                            Looks great!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Educational Session</label>
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Teacher List</label>
                                     </div>
                                     <div class="col-lg-12">
                                         <select class="form-select ">
                                             <option selected="">Select Fee</option>
                                             <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
-                                            <option value="I">1st</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <br>
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Day')">Create</button>
+                            </div> 
+                        </form>
+                        }
+                        @else{
+                        <form>
+                            <div class="col-md-3 pt-2">
                                 <label for="validationCustom01" class="form-label">Fee Amount</label>
                                 <input type="number" class="form-control" id="validationCustom01" placeholder="₹" required>
                                 <div class="valid-feedback">
@@ -86,26 +88,52 @@
                                     Looks great!
                                 </div>
                             </div>
+                            <br>
                             <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                    <label class="form-check-label" for="invalidCheck">
-                                        I agree to the terms and conditions
-                                    </label>
-                                    <div class="invalid-feedback">
-                                        You must agree before submitting.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Create</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Month')">Create</button>
                             </div> 
                         </form>
-
+                        }
                     </div>
                 </div>
 
             </div>
         </div>
+
+
+        <!-- Attendce Data Records -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Teacher Name</th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Father Name</th>
+                                    <th scope="col">Staus</th>
+                                    <th scope="col">Remark</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                    <td scope="col">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
