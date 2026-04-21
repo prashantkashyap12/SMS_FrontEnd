@@ -121,4 +121,25 @@ export class ConfigService {
     return this._http.patch(url, model);
   }
 
+  // Add Teacher -- OPEN
+  AddTeacher(model:any):Observable<any>{
+    let url = this.baseUrls+''+`api/SMS_Config/CreateTeacher`;
+    return this._http.post(url, model);
+   }
+  viewTeacher():Observable<any>{ 
+    let url = this.baseUrls+''+`api/SMS_Config/TeacherList`;
+    return this._http.get(url);
+  }
+  updateTeacher(model:any):Observable<any>{
+    let url = this.baseUrls+''+`api/SMS_Config/UpdateTeacher`;
+    return this._http.patch(url, model);
+  }
+  delTeacher(TeacherId:any):Observable<any>{
+    let url = this.baseUrls+''+`api/SMS_Config/DeleteTeacher?TeacherId=${TeacherId}`;
+    return this._http.delete(url);
+  }
+  // Add Teacher -- CLOSE
+
+
+
 }

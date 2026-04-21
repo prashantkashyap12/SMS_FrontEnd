@@ -30,10 +30,10 @@ export class AppComponent {
       console.log("token Extact =", Tokerole);
       this.sideBar = Tokerole.role;
       if(this.sideBar === 'admin'){
-        this._common.navigate(['/add-kharcha']);
+        this._common.navigate(['/dashbord']);
         
       } else if(this.sideBar === 'user'){
-        this._common.navigate(['/add-kharcha']);
+        this._common.navigate(['/dashbord']);
       }
     } else {
       this.islogin = false;

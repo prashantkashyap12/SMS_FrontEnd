@@ -1,0 +1,101 @@
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row justify-content-center py-2 pt-3">
+            <div class="col-xxl-5 col-xl-7 text-center">
+                <h3 class="fw-bold">
+                    Teacher Management
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-header justify-content-between">
+                        <h5 class="card-title">Teacher Registeration</h5>
+                        <div class="row g-lg-4 g-2">
+                            <div class="col-lg-8">
+                                <div class="app-search">
+     
+                                    <div class="ng-autocomplete">
+                                        <ng-autocomplete 
+                                        [data]="data"
+                                        [searchKeyword]="keyboard"
+                                        placeholder="Select country"
+                                        (selected)='selectEvent($event)'
+                                        (inputChanged)='onChangeSearch($event)'
+                                        (inputFocused)='onFocused($event)'
+                                        [itemTemplate]="itemTemplate"
+                                        [notFoundTemplate]="notFoundTemplate">                                 
+                                        </ng-autocomplete>
+
+                                        <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.Name"></a>
+                                        </ng-template>
+
+                                        <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+        
+                    <div class="card-body">
+                        <form class="row g-3 needs-validation" [formGroup]="TeacherForm">
+
+                            <div class="col-md-4">
+                                <label class="form-label">Teacher Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Name" formControlName="Name" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Contact</label>
+                                <input type="text" class="form-control" placeholder="Enter Contact Number" formControlName="Contact" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">UID</label>
+                                <input type="text" class="form-control" placeholder="Enter UID" formControlName="UID" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Joining Date</label>
+                                <input type="date" class="form-control" formControlName="JoiningDate" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Select Class</label>
+                                <select class="form-select" formControlName="ClassId" required >
+                                    <option selected="">Select Genrated Class </option>
+                                    <option *ngFor="let a of this.ClassLsdata" [value]="a.GenClassKey">{{ a.GenClassValue }}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" formControlName="SubjectTeacher" placeholder="Enter Subject">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Remark</label>
+                                <input type="text" class="form-control" placeholder="Enter Remark" formControlName="Remark">
+                            </div>
+
+                            <div class="col-12 d-flex">
+                                <button class="btn btn-primary" (click)="onSubmit()">Save Teacher</button>&nbsp;&nbsp;
+                                <!-- <button class="btn btn-outline-secondary" (click)="Delete()">Delete</button>&nbsp;&nbsp; -->
+                                <button class="btn btn-outline-secondary" (click)="NewEntry()">New Entry</button>&nbsp;&nbsp;
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

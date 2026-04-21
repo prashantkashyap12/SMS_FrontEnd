@@ -117,7 +117,7 @@ export class FeeCollectionComponent {
       TotalPay: [''],      //
       DueWallet: [''],     //
       TranMode: [''],      //
-      Remark: ['-'],        //
+      GradTotal: [''],        //
     })
   }
 
@@ -171,12 +171,15 @@ export class FeeCollectionComponent {
       this.receipt = "ISHWARIPRASAD_"+res.data.toString();
     })
     this.FeeCalc();
+
   }
 
   baseTotal:any;
   FeeCalc(){
     // Total Value Extraction
     let totalPenalty = 0;
+    this.totalAmount = 0;
+    this.totalPenalty = 0;
     this.feeValue.forEach((item: any) => {
         item.stracture.forEach((s: any) => {
             this.totalAmount += Number(s.Fee_Amount);
@@ -194,7 +197,7 @@ export class FeeCollectionComponent {
   discountCalc(event:any){
     setTimeout(()=>{
       const discountAmount = (this.grandTotal/100) * Number(event.target.value);
-      this.grandTotal = this.grandTotal - discountAmount;
+      this.baseTotal = this.grandTotal - discountAmount;
     },2000)
   }
 
@@ -216,14 +219,14 @@ export class FeeCollectionComponent {
       Receipt: this.FeeDepo.value.Receipt ?? '-',
       TranDate: this.FeeDepo.value.TranDate ?? '-',
       FeeMonth: this.FeeDepo.value.FeeMonth ?? '-',
-      FeeAmount: String(this.FeeDepo.value.FeeAmount) ?? '-',
+      FeeAmount: String(this.totalAmount) ?? '-',
       Discount: String(this.FeeDepo.value.Discount) ?? '0',
       DueDate: this.FeeDepo.value.DueDate ?? '-',
       LateCharges: String(this.FeeDepo.value.LateCharges) ?? '-',
-      TotalPay: String(this.FeeDepo.value.TotalPay) ?? '-',
+      TotalPay: String(this.totalAmount) ?? '',
       DueWallet: String(this.FeeDepo.value.DueWallet) ?? '-',
       TranMode: this.FeeDepo.value.TranMode ?? '-',
-      GrandTotal: this.FeeDepo.value.Remark ?? '-',
+      GrandTotal: String(this.FeeDepo.value.GradTotal) ?? '',
     }
     // if(this.FeeDepo.valid){
       this._feeManager.FeeCollection(model).subscribe(res=>{
@@ -233,7 +236,7 @@ export class FeeCollectionComponent {
           window.location.reload();
         }
         else{
-          alert(res.message);
+          alert(res.data);
         }
       })
     // }

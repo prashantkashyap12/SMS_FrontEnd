@@ -352,7 +352,7 @@
                 <!--- Sidenav Menu -->
                 <ul class="side-nav">
 
-                     @if(sideBar!="admin") {
+                     @if(sideBar=="admin") {
                         <li class="side-nav-item">
                             <a routerLink="/dashboard" class="side-nav-link">
                                 <span class="menu-icon"><i data-lucide="circle-gauge"></i></span>
@@ -401,7 +401,11 @@
                                             <span class="menu-text" data-lang="pages-empty">Fee Stracture</span>
                                         </a>
                                     </li>
-
+                                    <li class="side-nav-item">
+                                        <a routerLink="/teacher-manager" class="side-nav-link">
+                                            <span class="menu-text" data-lang="pages-empty">Teacher Manager</span>
+                                        </a>
+                                    </li>
                                     <li class="side-nav-item">
                                         <a routerLink="/Create-Role" class="side-nav-link">
                                             <span class="menu-text" data-lang="pages-terms-conditions">Create Role</span>

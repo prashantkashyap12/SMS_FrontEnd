@@ -231,7 +231,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Grand Total</label>
-                                <input type="number" class="form-control" id="validationCustom01" formControlName="FeeAmount" [(ngModel)]="grandTotal" placeholder="₹" readonly required>
+                                <input type="number" class="form-control" id="validationCustom01" formControlName="GradTotal" [(ngModel)]="baseTotal" placeholder="₹" readonly required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
@@ -252,7 +252,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Total Payment</label>
-                                <input type="number" class="form-control" id="validationCustom02" formControlName="TotalPay" placeholder="Enter Comment..." required>
+                                <input type="number" class="form-control" id="validationCustom02" formControlName="TotalPay" placeholder="Net Payment" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
@@ -263,13 +263,6 @@
                                     <option value="Online">Online Payment</option>
                                     <option value="Offline">Cash Payment</option>
                                 </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="validationCustom02" class="form-label">Remark</label>
-                                <input type="text" class="form-control" id="validationCustom02" formControlName="Remark" placeholder="Enter Comment..." required>
-                                <div class="valid-feedback">
-                                    Looks great!
-                                </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-check">

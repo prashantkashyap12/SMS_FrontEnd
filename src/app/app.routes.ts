@@ -18,6 +18,7 @@ export const routes: Routes = [
     {path:'Create-User', loadComponent:()=>import('./SchoolManagement/Configrations/user-role/user-role.component').then(m=>m.UserRoleComponent)},    
     {path:'User-Approval', loadComponent:()=>import('./SchoolManagement/Configrations/approve-user/approve-user.component').then(m=>m.ApproveUserComponent)},    
     {path:'Invoice-Manager', loadComponent:()=>import('./SchoolManagement/Configrations/print-invoice/print-invoice.component').then(m=>m.PrintInvoiceComponent)},
+    {path:'teacher-manager', loadComponent:()=>import('./SchoolManagement/Configrations/teacher-manager/teacher-manager.component').then(m=>m.TeacherManagerComponent)},
     
     // Student Management
     {path:'add-student',loadComponent:()=>import('./SchoolManagement/StudentManagment/add-student/add-student.component').then(m=>m.AddStudentComponent)},
