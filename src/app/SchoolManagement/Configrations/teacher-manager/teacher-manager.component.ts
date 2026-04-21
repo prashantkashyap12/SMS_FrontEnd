@@ -24,6 +24,7 @@ export class TeacherManagerComponent {
   ngOnInit(){
     this.Init();
     this.allot();
+    this.isButton = true;
   }
   constructor(private _fb:FormBuilder, private _configService:ConfigService){}
 
@@ -35,12 +36,13 @@ export class TeacherManagerComponent {
       JoiningDate:[''],
       ClassId:[0],
       SubjectTeacher:[''],
-      Remark:['']
+      Remark:[''],
+      Salary:[0]
     })
   }
 
+  TeacherId:any;
   selectEvent(a:any){
-
     this.TeacherForm.patchValue({
       TeacherId: a.TeacherId,
       Name: a.Name,
@@ -49,10 +51,11 @@ export class TeacherManagerComponent {
       JoiningDate: a.JoiningDate,
       ClassId: a.ClassId,
       SubjectTeacher: a.SubjectTeacher,
-      Remark: a.Remark
+      Remark: a.Remark,
+      Salary: a.Salary
     })
     this.isButton = false;  
-    
+    this.TeacherId = a.TeacherId;
   }
   onChangeSearch(a:any){}
   onFocused(a:any){}
@@ -73,14 +76,15 @@ export class TeacherManagerComponent {
         return;
       }
       let model = {
-        TeacherId: this.TeacherForm.value.TeacherId??0,
+        TeacherId: this.TeacherId??0,
         Name: this.TeacherForm.value.Name,
         Contact: this.TeacherForm.value.Contact,
         UID: this.TeacherForm.value.UID,
         JoiningDate: this.TeacherForm.value.JoiningDate,
         ClassId: Number(this.TeacherForm.value.ClassId),
         SubjectTeacher: this.TeacherForm.value.SubjectTeacher,
-        Remark: this.TeacherForm.value.Remark
+        Remark: this.TeacherForm.value.Remark,
+        Salary: Number(this.TeacherForm.value.Salary)
       }
 
       if(this.isButton){
@@ -100,7 +104,7 @@ export class TeacherManagerComponent {
           if(res.success){
             alert(res.message);
             this.TeacherForm.reset();
-            this.allot();
+            this.ngOnInit();
           } else {
             alert(res.message);
           }
@@ -108,12 +112,11 @@ export class TeacherManagerComponent {
       }
   }
 
-  Delete(){
-    this._configService.delTeacher(this.TeacherForm.value.TeacherId).subscribe((res:any)=>{
-      if(res.success){
+  delete(){
+    this._configService.delTeacher(this.TeacherId).subscribe((res:any)=>{
+      if(res.state){
         alert(res.message);
-        this.TeacherForm.reset();
-        this.allot();
+        this.ngOnInit();
       } else {
         alert(res.message);
       } 

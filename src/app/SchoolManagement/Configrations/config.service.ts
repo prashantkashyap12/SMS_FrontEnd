@@ -135,7 +135,7 @@ export class ConfigService {
     return this._http.patch(url, model);
   }
   delTeacher(TeacherId:any):Observable<any>{
-    let url = this.baseUrls+''+`api/SMS_Config/DeleteTeacher?TeacherId=${TeacherId}`;
+    let url = this.baseUrls+''+`api/SMS_Config/TeacherDelete?TeacherId =${TeacherId}`;
     return this._http.delete(url);
   }
   // Add Teacher -- CLOSE
