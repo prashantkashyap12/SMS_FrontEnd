@@ -90,10 +90,8 @@ export class TeacherManagerComponent {
       if(this.isButton){
         
         this._configService.AddTeacher(model).subscribe((res:any)=>{
-          if(res.success){
-            alert(res.message);
-            this.TeacherForm.reset();
-            this.allot();
+          if(res.state){
+            this.ngOnInit();
           } else {
             alert(res.message);
           }
@@ -101,9 +99,7 @@ export class TeacherManagerComponent {
       } else {
         // Update Teacher
         this._configService.updateTeacher(model).subscribe((res:any)=>{
-          if(res.success){
-            alert(res.message);
-            this.TeacherForm.reset();
+          if(res.state){
             this.ngOnInit();
           } else {
             alert(res.message);

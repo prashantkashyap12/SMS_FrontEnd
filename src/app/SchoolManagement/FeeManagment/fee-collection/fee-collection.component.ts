@@ -171,7 +171,6 @@ export class FeeCollectionComponent {
       this.receipt = "ISHWARIPRASAD_"+res.data.toString();
     })
     this.FeeCalc();
-
   }
 
   baseTotal:any;

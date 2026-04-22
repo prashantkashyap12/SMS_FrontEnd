@@ -22,7 +22,7 @@
                                         <ng-autocomplete 
                                         [data]="data"
                                         [searchKeyword]="keyboard"
-                                        placeholder="Select country"
+                                        placeholder="Find Teacher"
                                         (selected)='selectEvent($event)'
                                         (inputChanged)='onChangeSearch($event)'
                                         (inputFocused)='onFocused($event)'
@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label">Select Class</label>
+                                <label class="form-label">Assign as Class Teacher</label>
                                 <select class="form-select" formControlName="ClassId" required >
                                     <option selected="">Select Genrated Class </option>
                                     <option *ngFor="let a of this.ClassLsdata" [value]="a.GenClassKey">{{ a.GenClassValue }}</option>

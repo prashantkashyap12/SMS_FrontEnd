@@ -12,20 +12,18 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-
                         <div class="bg-light p-2">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label fw-bold">Attenduce View</label>
                                         <div class="mb-2 d-flex justify-content-center">
                                             <div class="form-check form-check-inline fs-lg">
                                                 <input class="form-check-input" type="radio" Name="Gender" checked (click)="formChange('Month')" value="Month" id="inlineRadio1" >
-                                                <label class="form-check-label" for="inlineRadio1">Monthly Wise</label>
+                                                <label class="form-check-label" for="inlineRadio1">Student Wise (Monthly)</label>
                                             </div>
                                             <div class="form-check form-check-inline fs-lg">
                                                 <input class="form-check-input" type="radio" Name="Gender" (click)="formChange('Day')" value="Day" id="inlineRadio2">
-                                                <label class="form-check-label" for="inlineRadio2">Day Wise</label>
+                                                <label class="form-check-label" for="inlineRadio2">Teacher Wise (Day)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -33,8 +31,8 @@
                             </div>
                         </div>
 
-                        @if(isDayWise){
-                        <form class="row g-3 needs-validation">
+                        @if(!isDayWise){
+                        <form class="row g-3 needs-validation pt-3">
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12 pt-2">
@@ -48,10 +46,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row ">
-                                    <div class="col-lg-12">
-                                        <label class="col-form-label" style="padding-top: 0px;">Select Teacher List</label>
-                                    </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 pt-2">
+                                        <label class="col-form-label" style="padding-top: 0px;">Select Class Teacher</label>
                                         <select class="form-select ">
                                             <option selected="">Select Fee</option>
                                             <option value="I">1st</option>
@@ -61,36 +57,36 @@
                             </div>
                             <br>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Day')">Create</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Day')">Search Attenduce</button>
                             </div> 
                         </form>
                         }
                         @else{
-                        <form>
-                            <div class="col-md-3 pt-2">
-                                <label for="validationCustom01" class="form-label">Fee Amount</label>
-                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" required>
-                                <div class="valid-feedback">
-                                    Looks great!
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="validationCustom01" class="form-label">Late Fee Penalty </label>
-                                <input type="number" class="form-control" id="validationCustom01" placeholder="₹" required>
+                        <form class="row g-3 needs-validationv pt-3">
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">Select Month</label>
+                                <input type="month" class="form-control" id="validationCustom01" placeholder="₹" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="validationCustom02" class="form-label">Remark</label>
-                                <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Comment..." required>
-                                <div class="valid-feedback">
-                                    Looks great!
-                                </div>
+                                <label for="validationCustom01" class="form-label">Class Teacher</label>
+                                <select class="form-select ">
+                                    <option selected="">Select Fee</option>
+                                    <option value="I">1st</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom02" class="form-label">Student Name + Father Name</label>
+                                <select class="form-select ">
+                                    <option selected="">Select Fee</option>
+                                    <option value="I">1st</option>
+                                </select>
                             </div>
                             <br>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Month')">Create</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Month')">Search Attenduce</button>
                             </div> 
                         </form>
                         }
