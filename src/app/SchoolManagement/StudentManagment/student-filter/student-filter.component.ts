@@ -41,8 +41,11 @@ export class StudentFilterComponent {
 
    data2:any;
    filterName:any;
+   StudnetPhoto:any;
    classChange(a:any){
     let id = a.target.value;
+    // this.StudnetPhoto = this.data.?.StudnetPhoto
+    console.log(this.data)
     this.data2 = this.data.filter((a:any)=>a.ClassGenId==id);
     console.log(this.data2.length);   
   }

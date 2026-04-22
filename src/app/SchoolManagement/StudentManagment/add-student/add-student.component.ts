@@ -93,7 +93,6 @@ export class AddStudentComponent {
         this.StdId = item.AdharCardPath;
         this.StdMarkSheet = item.LastYearReportCardPath;
         this.GuardinId = item.GuardianIDPath;
-
       }
       
       this.addStudentForm.patchValue({
@@ -294,7 +293,6 @@ export class AddStudentComponent {
     this.img2="";
     this.img3="";
     this.img4="";
-    window.location.reload();
   }
 
 }

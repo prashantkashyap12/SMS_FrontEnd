@@ -24,18 +24,15 @@ export class StudentDocComponent {
   }
 
   mainData:any=[];
+  recId:any
   allot(){
-    let recId;
     this._router.paramMap.subscribe(res=>{
-      recId = res.get('id');
+      this.recId = res.get('id');
     })
 
-    this._studentService.AllStudentRecord2(recId).subscribe(res=>{
-      this.mainData = res.data[0];
+    this._studentService.AllStudentRecord2(this.recId).subscribe(res=>{
+      console.log(res.data[0]);
+      this.mainData = res.data.find((a:any)=>a.AdmissionId==this.recId);
     })
-
   }
-
-
-
 }

@@ -142,13 +142,13 @@
                                             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">First Name</label>
+                                                    <label class="form-label">Name</label>
                                                     <input type="text" class="form-control" placeholder="Enter your first name" formControlName="FirstName" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Last Name</label>
+                                                    <label class="form-label">Govt. ID</label>
                                                     <input type="text" class="form-control" placeholder="Enter your last name" formControlName="LastName" >
                                                 </div>
                                             </div>
@@ -240,13 +240,13 @@
                                                     <label class="form-label">Facilitys</label>
                                                     <div class="d-flex flex-wrap gap-4" *ngFor="let a of this.FacilityFee">
                                                         <div class="form-check form-check-primary mb-2 fs-lg">
-                                                            <input type="checkbox" class="form-check-input" (change)="facilitiesCheck(a.FeeStractureId, $event)" [checked]="facilities.includes(a.FeeStractureId)" [id]="a.FeeStractureId">
-                                                            <label class="form-check-label" [for]="a.FeeStractureId">{{a.FeeStractRemark}}</label>
+                                                            <input type="checkbox" class="form-check-input" (change)="facilitiesCheck(a.FeeStractureId, $event)" [checked]="true" [id]="a.FeeStractureId">
+                                                            <label class="form-check-label" [for]="a.FeeStractureId">{{a.FeeStractRemark}}  ({{a.Fee_Amount}}/{{a.Fee_Panalty}})</label>
                                                         </div> 
                                                     </div>
                                                 </div>
                                             </div>
-                                                <div class="col-xl-12">
+                                            <div class="col-xl-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Mode of Study</label>
                                                     <select class="form-select" formControlName="StudyMode" >
@@ -263,13 +263,6 @@
                                             <button type="button" class="btn btn-primary" data-wizard-next>Next: Parent Info →</button>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
 
                                     <!-- Step 4: Parent Info -->
                                     <div class="tab-pane fade" id="parentInfo">

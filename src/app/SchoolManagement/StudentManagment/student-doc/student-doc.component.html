@@ -29,14 +29,12 @@
 
 
                     <div class="card-body">
-
-                        <!-- <div *ngFor="let data of this.mainData; let i = index"> -->
+                            <!-- <div *ngFor="let data of this.mainData; let i = index"> -->
                         <img [src]="baseUrl+mainData.StudnetPhoto" alt="" class="card">
                         <h5>{{mainData.FirstName}} {{mainData.LastName}}</h5>
                         <p>{{mainData | json}}</p>
                         <button class="btn btn-success" [routerLink]="['/ViewIdCard', mainData.AdmissionId]"> Make Id Card </button>
-
-                </div>
+                    </div>
 
             </div>
         </div>
