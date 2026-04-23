@@ -41,17 +41,23 @@ export class StdManagService {
       return this._http.delete(url);
     }
 
-
     // Attendance Record
     AddAttendanceRecord(model:any):Observable<any>{
       let url = this.baseUrl+''+`api/SMS_Config/SubmitAttendance`;
       return this._http.post(url,model);
     }
 
+    // Attenduce View - TeacherId
+    AttendanceTeacherId(model:any):Observable<any>{
+      let url = this.baseUrl+''+`api/SMS_Config/GetAttenduceTeacherWise?teacherId=${model.TeacherId}&currentDate=${model.Date}`;
+      return this._http.get(url);
+    }
 
-
-   
-
+    // Attenduce View - StudentId + Month_Year + Studnet Id
+    AttendanceStudentId(model:any):Observable<any>{
+      let url = this.baseUrl+''+`api/SMS_Config/GetAttenduceStd`;
+      return this._http.get(url, model);
+    }
 
 
    

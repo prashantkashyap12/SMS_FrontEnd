@@ -98,7 +98,7 @@ export class AttenduceMangerComponent {
         }))
       };
       this._stdRec.AddAttendanceRecord(model).subscribe((res:any)=>{
-        console.log(res);
+        alert(res.message);
       })
     }
     

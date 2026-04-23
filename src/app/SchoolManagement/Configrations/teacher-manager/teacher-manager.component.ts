@@ -4,6 +4,7 @@ import { Component, model } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { ConfigService } from '../config.service';
+import { ClassData } from './class-data';
 
 @Component({
   selector: 'app-teacher-manager',
@@ -65,12 +66,26 @@ export class TeacherManagerComponent {
     this._configService.viewGenClass().subscribe((res:any)=>{
       this.ClassLsdata = res.data;
     })
-
     this._configService.viewTeacher().subscribe((res:any)=>{
       this.data = res.message;
+      this.ConvertNew();  
+    })
+  }
+
+   // new Object formating
+    ConvertNew(){
+      let data = (this.ClassLsdata as ClassData[]).map(({GenClassKey, ...rest})=>{
+      return {
+        ClassId2 : GenClassKey,
+        ...rest
+      }
     })
 
-  }
+    console.log(data);
+    console.log(this.ClassLsdata);
+    console.log(this.data);
+    }
+
   onSubmit(){
       if(!this.TeacherForm.valid){
         return;

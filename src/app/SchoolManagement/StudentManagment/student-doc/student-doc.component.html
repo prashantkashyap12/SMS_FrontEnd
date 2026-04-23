@@ -11,30 +11,29 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <div class="card">
-                    <div class="card-header justify-content-between">
-                        <h5 class="card-title">Student Profile Records</h5>
-                        <div class="row g-lg-4 g-2">
-                            <div class="col-lg-4">
-                                <label for="SearchInput" class="col-form-label">Search Student</label>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="app-search">
-                                    <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
-                                    <i class="ti ti-search fs-24 positionCustom"></i>
-                                </div>
+            <div class="card">
+                
+                <div class="card-header justify-content-between">
+                    <h5 class="card-title">Student Profile Records</h5>
+                    <div class="row g-lg-4 g-2">
+                        <div class="col-lg-4">
+                            <label for="SearchInput" class="col-form-label">Search Student</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="app-search">
+                                <input type="search" class="form-control" id="SearchInput" placeholder="Search for something...">
+                                <i class="ti ti-search fs-24 positionCustom"></i>
                             </div>
                         </div>
                     </div>
+                </div>
 
-
-                    <div class="card-body">
-                            <!-- <div *ngFor="let data of this.mainData; let i = index"> -->
-                        <img [src]="baseUrl+mainData.StudnetPhoto" alt="" class="card">
-                        <h5>{{mainData.FirstName}} {{mainData.LastName}}</h5>
-                        <p>{{mainData | json}}</p>
-                        <button class="btn btn-success" [routerLink]="['/ViewIdCard', mainData.AdmissionId]"> Make Id Card </button>
-                    </div>
+                <div class="card-body">
+                    <img [src]="baseUrl+mainData.StudnetPhoto" alt="" class="card" style="height: 200px;">
+                    <h5>{{mainData.FirstName}} {{mainData.LastName}}</h5>
+                    <p>{{mainData | json}}</p>
+                    <button class="btn btn-success" [routerLink]="['/ViewIdCard', mainData.AdmissionId]"> Make Id Card </button>
+                </div>
 
             </div>
         </div>

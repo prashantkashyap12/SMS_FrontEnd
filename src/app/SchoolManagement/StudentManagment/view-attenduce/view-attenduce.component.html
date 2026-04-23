@@ -32,12 +32,12 @@
                         </div>
 
                         @if(!isDayWise){
-                        <form class="row g-3 needs-validation pt-3">
+                        <form class="row g-3 needs-validation pt-3" [formGroup]="TeacherWise">
                             <div class="col-md-6">
                                 <div class="row ">
                                     <div class="col-lg-12 pt-2">
                                         <label class="col-form-label" style="padding-top: 0px;">Select Attenduce Date</label>
-                                         <input type="date" class="form-control" id="validationCustom01" placeholder="₹" required>
+                                         <input type="date" class="form-control" id="validationCustom01" formControlName="Date" placeholder="₹" required>
                                         <div class="valid-feedback">
                                             Looks great!
                                         </div>
@@ -48,16 +48,16 @@
                                 <div class="row ">
                                     <div class="col-lg-12 pt-2">
                                         <label class="col-form-label" style="padding-top: 0px;">Select Class Teacher</label>
-                                        <select class="form-select ">
+                                        <select class="form-select" formControlName="TeacherId">
                                             <option selected="">Select Fee</option>
-                                            <option value="I">1st</option>
+                                            <option *ngFor="let a of TeacherList" [value]="a.TeacherId">{{a.Name}}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Day')">Search Attenduce</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Teacher')">Search Attenduce</button>
                             </div> 
                         </form>
                         }
@@ -86,7 +86,7 @@
                             </div>
                             <br>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Month')">Search Attenduce</button>
+                                <button class="btn btn-primary" type="submit" (click)="onSubmit('Student')">Search Attenduce</button>
                             </div> 
                         </form>
                         }
