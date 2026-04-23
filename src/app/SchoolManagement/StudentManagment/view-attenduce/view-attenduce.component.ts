@@ -62,15 +62,19 @@ export class ViewAttenduceComponent {
       }
       this._stdRec.AttendanceStudentId(model).subscribe((res:any)=>{
         console.log(res);
+      },(err:any)=>{
+        alert(err)
       })
     }else if(a == 'Teacher'){
-      this.isDayWise = !this.isDayWise;
+      this.isDayWise = false;
       model = {
         TeacherId : +this.TeacherWise.value.TeacherId,
         Date : this.TeacherWise.value.Date
       }
       this._stdRec.AttendanceTeacherId(model).subscribe((res:any)=>{
         console.log(res);
+      },(err:any)=>{
+        alert(err.error)
       })
     }
   }
