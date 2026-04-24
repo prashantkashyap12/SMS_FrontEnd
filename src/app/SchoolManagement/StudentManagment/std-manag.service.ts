@@ -55,8 +55,8 @@ export class StdManagService {
 
     // Attenduce View - StudentId + Month_Year + Studnet Id
     AttendanceStudentId(model:any):Observable<any>{
-      let url = this.baseUrl+''+`api/SMS_Config/GetAttenduceStd`;
-      return this._http.get(url, model);
+      let url = this.baseUrl+''+`api/SMS_Config/GetAttenduceStd?AttendanceId=${model.StdId}&TeacherId=${model.TeacherId}&DateRange=${model.Date}`;
+      return this._http.get(url);
     }
 
 

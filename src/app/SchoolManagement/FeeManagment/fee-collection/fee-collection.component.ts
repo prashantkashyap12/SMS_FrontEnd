@@ -86,6 +86,7 @@ export class FeeCollectionComponent {
   filterName:any;
   viewProfile:any= [];
   classChange(a:any){
+    this.isFees = false;
     let id = a.target.value;
     this.data2 = this.data.filter((a:any)=>a.ClassGenId==id);
     console.log(this.data2.length);   

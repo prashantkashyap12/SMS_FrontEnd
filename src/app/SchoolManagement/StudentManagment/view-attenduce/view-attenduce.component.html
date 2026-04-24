@@ -15,8 +15,8 @@
                         <div class="bg-light p-2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <div class="mb-2 d-flex justify-content-center">
+                                    <div class="m-3">
+                                        <div class="d-flex justify-content-center">
                                             <div class="form-check form-check-inline fs-lg">
                                                 <input class="form-check-input" type="radio" Name="Gender" checked (click)="formChange('Month')" value="Month" id="inlineRadio1" >
                                                 <label class="form-check-label" for="inlineRadio1">Student Wise (Monthly)</label>
@@ -62,26 +62,26 @@
                         </form>
                         }
                         @else{
-                        <form class="row g-3 needs-validationv pt-3">
+                        <form class="row g-3 needs-validationv pt-3" [formGroup]="StudentWise">
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Select Month</label>
-                                <input type="month" class="form-control" id="validationCustom01" placeholder="₹" required>
+                                <input type="month" class="form-control" id="validationCustom01" placeholder="₹" formControlName="StdDate" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="validationCustom01" class="form-label">Class Teacher</label>
-                                <select class="form-select ">
+                                <select class="form-select" (change)="SelectedTeacher($event)" formControlName="TeacherId">
                                     <option selected="">Select Fee</option>
-                                    <option value="I">1st</option>
+                                    <option *ngFor="let a of TeacherList" [value]="a.TeacherId">{{a.Name}}</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label for="validationCustom02" class="form-label">Student Name + Father Name</label>
-                                <select class="form-select ">
+                                <label for="validationCustom02" class="form-label" >Student Name + Father Name</label>
+                                <select class="form-select" (change)="SelectedStd($event)" formControlName="StdId">
                                     <option selected="">Select Fee</option>
-                                    <option value="I">1st</option>
+                                    <option *ngFor="let a of overAllStd" [value]="a.AdmissionId">{{a.FirstName+' Son of "'+a.FatherName+'"'}}</option>
                                 </select>
                             </div>
                             <br>
@@ -115,7 +115,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor=" let data of ">
                                     <td scope="col">-</td>
                                     <td scope="col">-</td>
                                     <td scope="col">-</td>

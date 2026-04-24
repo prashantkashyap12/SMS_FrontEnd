@@ -34,9 +34,13 @@ export const routes: Routes = [
     {path:'manager-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-manager/fee-manager.component').then(m=>m.FeeManagerComponent)},
     {path:'print-fee', loadComponent:()=>import('./SchoolManagement/FeeManagment/fee-slip/fee-slip.component').then(m=>m.FeeSlipComponent)},
     
+
+
+
+
     // Kharcha Management
-    {path:'add-kharcha', loadComponent:()=>import('./SchoolManagement/Kharcha/add-kharcha/add-kharcha.component').then(m=>m.AddKharchaComponent)},
+    {path:'Add-kharcha', loadComponent:()=>import('./SchoolManagement/Kharcha/add-kharcha/add-kharcha.component').then(m=>m.AddKharchaComponent)},
     {path:'view-kharcha', loadComponent:()=>import('./SchoolManagement/Kharcha/show-kharcha/show-kharcha.component').then(m=>m.ShowKharchaComponent)},
+    {path:'print-kharcha', loadComponent:()=>import('./SchoolManagement/Kharcha/print-kharcha/print-kharcha.component').then(m=>m.PrintKharchaComponent)},
 
-
-    ];
+];
