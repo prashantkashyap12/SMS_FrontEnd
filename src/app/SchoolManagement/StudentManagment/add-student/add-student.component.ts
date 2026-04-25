@@ -75,11 +75,18 @@ export class AddStudentComponent {
     img2:any;
     img3:any;
     img4:any;
+    FeeListRecord:any[] = [];
     selectEvent(item:any){
+      this.facilities=[];
       if(item.ClassGenId){
         this.ViewFasilityLs(item.ClassGenId); // view fasility
-        let FeeLsId = item.FeeLsId.split(',').map((id: string) => id.trim()); // Extrac Ls
-        console.log(FeeLsId);
+        let FeeListRecord = item.FeeLsId.split(',').map((id: string) => id.trim()); // Extrac Ls
+        for(let data of FeeListRecord){
+          this.facilities.push(Number(data));
+        }
+        this.facilities = [...new Set(this.facilities)];
+        console.log(this.facilities);
+        console.log(this.FeeListRecord);
         // ImagePath
         this.img1 = this.url+'wwwroot/'+item.StudnetPhoto;
         this.img2 = this.url+'wwwroot/'+item.AdharCardPath;
@@ -96,6 +103,7 @@ export class AddStudentComponent {
       }
       
       this.addStudentForm.patchValue({
+        // P1
         StrudnetTran: item.AdmissionId,
         AdmissionDate: moment(item.AdmissionDate).format('YYYY-MM-DD'),
         DateOfBirth: moment(item.DateOfBirth).format('YYYY-MM-DD'),
@@ -111,11 +119,8 @@ export class AddStudentComponent {
         City: item.City,
         State: item.State,
         PinCode: item.PinCode,
-
         // P3
-
         StudyMode: item.StudyMode,
-
         // P4
         FatherName: item.FatherName,
         MotherName: item.MotherName,
@@ -147,7 +152,7 @@ export class AddStudentComponent {
     const select = a.target as HTMLSelectElement;
     if(this.isOldStudent==undefined){
       let data = select.options[select.selectedIndex].text;
-      this.StudentTranId =  Math.floor(1000+Math.random()*9000)+data   // "Std.SrNumber1/"+data;
+      this.StudentTranId =  Math.floor(1000+Math.random()*9000)+'#'+data   // "Std.SrNumber1/"+data;
     }
     this.ViewFasilityLs(a.target.value);
   }
@@ -168,8 +173,10 @@ export class AddStudentComponent {
     } else {
       this.facilities = this.facilities.filter((x:any) => x !== a);
     }
-    let datW = [...new Set(this.facilities)];
-    console.log(datW);
+    console.log(this.facilities);
+    
+    this.facilities = [...new Set(this.facilities)];
+    this.facilities = this.facilities.length > 0 ? this.facilities : [0];
   }
 
   // Uploaded Files Memorys
@@ -199,13 +206,15 @@ export class AddStudentComponent {
       }
     }
   }
-
-
   onSubmit(){
+    if (this.addStudentForm.invalid) {
+      alert("Form invalid hai");
+      return;
+    }
     const FileData = new FormData();
     FileData.append("StrudnetTran", this.addStudentForm.value.StrudnetTran || this.StudentTranId);
     FileData.append("AdmissionDate", this.addStudentForm.value.AdmissionDate ? moment(this.addStudentForm.value.AdmissionDate).format('YYYY-MM-DD') : "");
-    FileData.append("ClassGenId", (this.ClassValue ?? 0).toString());
+    FileData.append("ClassGenId", (this.ClassValue || this.addStudentForm.value.ClassGenId || 0).toString());
     FileData.append("FirstName", this.addStudentForm.value.FirstName);
     FileData.append("LastName", this.addStudentForm.value.LastName);
     FileData.append("Gender", this.addStudentForm.value.Gender);
@@ -227,14 +236,12 @@ export class AddStudentComponent {
     FileData.append("PrimaryContact", this.addStudentForm.value.PrimaryContact??"");
     FileData.append("SecondaryContact", this.addStudentForm.value.SecondaryContact??"");
     FileData.append("ParentsEmail", this.addStudentForm.value.ParentsEmail??"");
-    if (this.StdId) FileData.append("AdharCardPath", this.StdId);
-    if (this.StdMarkSheet) FileData.append("LastYearReportCardPath", this.StdMarkSheet);
-    if (this.GuardinId) FileData.append("GuardianIDPath", this.GuardinId);
-    if (this.StdPhoto) FileData.append("StudnetPhoto", this.StdPhoto); 
+    FileData.append("AdharCardPath", this.StdId ?? "");
+    FileData.append("LastYearReportCardPath", this.StdMarkSheet ?? "");
+    FileData.append("GuardianIDPath", this.GuardinId ?? "");
+    FileData.append("StudnetPhoto", this.StdPhoto ?? "");
     
     if(this.isButtonClicked){
-      // Call API to add student
-      // TEST
       FileData.forEach((value, key) => {
         console.log(key, value);
         if (value instanceof File) {
@@ -255,7 +262,6 @@ export class AddStudentComponent {
           console.log("File Name:", value.name);
         }
       });
-
       this._stdManagService.UpdateStudentComponent(FileData).subscribe(res=>{
         alert(res.message);
         this.clear()

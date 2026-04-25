@@ -30,7 +30,7 @@
                                         </ng-autocomplete>
 
                                         <ng-template #itemTemplate let-item>
-                                        <a [innerHTML]="item.FirstName"></a>
+                                        <a [innerHTML]="item.FirstName+' S/O '+item.FatherName"></a>
                                         </ng-template>
 
                                         <ng-template #notFoundTemplate let-notFound>
@@ -237,10 +237,10 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Facilitys</label>
+                                                    <label class="form-label">Facilitys (Bug on only UPDATE)</label>
                                                     <div class="d-flex flex-wrap gap-4" *ngFor="let a of this.FacilityFee">
                                                         <div class="form-check form-check-primary mb-2 fs-lg">
-                                                            <input type="checkbox" class="form-check-input" (change)="facilitiesCheck(a.FeeStractureId, $event)" [checked]="true" [id]="a.FeeStractureId">
+                                                            <input type="checkbox" class="form-check-input" (change)="facilitiesCheck(a.FeeStractureId, $event)" [checked]="facilities.includes(a.FeeStractureId)"  [id]="a.FeeStractureId">
                                                             <label class="form-check-label" [for]="a.FeeStractureId">{{a.FeeStractRemark}}  ({{a.Fee_Amount}}/{{a.Fee_Panalty}})</label>
                                                         </div> 
                                                     </div>

@@ -50,6 +50,7 @@ export class FeeCollectionComponent {
   Allot(){
     this._studentManager.AllStudentRecord().subscribe(res=>{
     this.data = res.data;
+    console.log(this.data);
     })
     this._cofigService.viewGenClass().subscribe(res=>{
       this.AllClassRec = res.data;
@@ -100,6 +101,7 @@ export class FeeCollectionComponent {
     this.viewProfile = a;
     this.walletget(this.viewProfile.AdmissionId);
     this.getFeeLs(this.viewProfile.FeeLsId);
+    console.log(this.viewProfile);
   }
 
   // Fee Management -- open
@@ -149,9 +151,6 @@ export class FeeCollectionComponent {
       });
       console.log("Final Touch"+this.feeValue);
     }, 2000);
-    
-    
-    
   }
 
   // Wallet Get
