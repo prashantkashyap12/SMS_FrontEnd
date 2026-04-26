@@ -87,6 +87,7 @@ export class FeeCollectionComponent {
   filterName:any;
   viewProfile:any= [];
   classChange(a:any){
+    this.feeValue = [];
     this.isFees = false;
     let id = a.target.value;
     this.data2 = this.data.filter((a:any)=>a.ClassGenId==id);
@@ -127,31 +128,37 @@ export class FeeCollectionComponent {
 
 
   dataFeeRec:any = [];
-  feeValue:any = [];
   feeStract:any = [];
+  abs:any=[];
   getFeeLs(ab:any){
     this._cofigService.viewFee().subscribe(res=>{
       this.dataFeeRec = res.data;
-      let abs = ab.split(',');
-      this.feeValue = this.dataFeeRec.filter((b: any) =>
-        abs.includes(String(b.FeeId))
-      );
-      console.log("Fee Value"+this.feeValue);
-    })
-    this._cofigService.viewFeeStract().subscribe(res=>{
-      this.feeStract = res.data;
-      console.log("Fee Structure "+this.feeStract);
-    })
-
-    console.log(this.viewProfile.ClassGenId);
-    setTimeout(() => {
-      this.feeValue.forEach((a: any) => {
-        let stract = this.feeStract.filter((b: any) => b.FeeId == a.FeeId);
-        a['stracture'] = stract;
-      });
-      console.log("Final Touch"+this.feeValue);
-    }, 2000);
+      this._cofigService.viewFeeStract().subscribe(res=>{
+        this.feeStract = res.data;
+        this.abs = ab.split(',').map((a:string)=>Number(a));
+        // console.log("Fee List "+this.dataFeeRec);
+        // console.log("Fee Structure "+this.feeStract);
+        // console.log("Selected Student Fees"+this.abs);
+        this.filterNames()
+      })
+    })    
   }
+  feeValue:any = [];
+  filterNames(){
+    for(let data of this.abs){
+       this.feeValue.push(this.feeStract.find((a:any)=>a.FeeStractureId ==data));
+    }
+    this.feeValue = this.feeValue.map((obj: any) => {
+      let data = this.dataFeeRec.find((a: any) => a.FeeId == obj.FeeId);
+      return {
+        ...obj,
+        FeeName: data ? data.FeeName : null
+      };
+    });
+    console.log(this.feeValue);
+  }
+
+
 
   // Wallet Get
   Getwallet:any = [];
@@ -180,10 +187,10 @@ export class FeeCollectionComponent {
     this.totalAmount = 0;
     this.totalPenalty = 0;
     this.feeValue.forEach((item: any) => {
-        item.stracture.forEach((s: any) => {
-            this.totalAmount += Number(s.Fee_Amount);
-            totalPenalty += Number(s.Fee_Panalty);
-        });
+        // item.forEach((s: any) => {
+            this.totalAmount += Number(item.Fee_Amount);
+            totalPenalty += Number(item.Fee_Panalty);
+        // });
     });
     this.dueDate;
     this.tranDate;
@@ -232,7 +239,6 @@ export class FeeCollectionComponent {
         if(res.state){
           alert("Fee Collected Successfully");
           this.ngOnInit();
-          window.location.reload();
         }
         else{
           alert(res.data);
