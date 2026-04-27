@@ -7,12 +7,12 @@ import { ConfigService } from '../../Configrations/config.service';
 import { urls } from '../../../common/common';
 import moment from 'moment';
 import { FeeManagerService } from '../fee-manager.service';
-import { timeInterval } from 'rxjs';
+import { timeInterval, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-fee-collection',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, CommonModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, CommonModule],
   providers:[StdManagService, ConfigService, FeeManagerService],
   templateUrl: './fee-collection.component.html',
   styleUrl: './fee-collection.component.css'
@@ -160,13 +160,24 @@ export class FeeCollectionComponent {
 
 
 
+
+
   // Wallet Get
-  Getwallet:any = [];
+  Getwallet:any = 0;
   walletget(AdmissionId:any){
     this._feeManager.getFeeStructure(AdmissionId).subscribe(res=>{
       let lastRec = res.data;
       this.Getwallet = lastRec.DueWallet ?? 0;
     })
+  }
+
+  CurrentDue:any;
+  payAmount:any;
+  walletUpdate(a:any){
+  this.payAmount = a.target.value
+    this.CurrentDue = this.baseTotal - a.target.value;
+    // this.Getwallet = this.CurrentDue;
+    console.log(this.Getwallet);
   }
 
    totalAmount = 0;
@@ -175,9 +186,6 @@ export class FeeCollectionComponent {
     let currentDate = new Date();
     currentDate.setMonth(Number(a.target.value));
     this.dueDate = moment(currentDate).format("YYYY-MM-15");
-
-
-
 
     this._feeManager.getRecipit().subscribe(res=>{
       console.log(res.data); 
@@ -227,6 +235,11 @@ export class FeeCollectionComponent {
 
 
   onSubmit(){
+    if(this.CurrentDue<0){
+      this.Getwallet =(+this.Getwallet)+ this.CurrentDue;
+    }else{
+      this.Getwallet =(+this.Getwallet)+ this.CurrentDue;
+    }
     let model = {
       TransactionId: this.FeeDepo.value.TransactionId ?? '',
       StudTran: this.FeeDepo.value.StudTran ?? '-',
@@ -237,22 +250,22 @@ export class FeeCollectionComponent {
       Discount: String(this.FeeDepo.value.Discount) ?? '0',
       DueDate: this.FeeDepo.value.DueDate ?? '-',
       LateCharges: String(this.FeeDepo.value.LateCharges) ?? '-',
-      TotalPay: String(this.totalAmount) ?? '',
-      DueWallet: String(this.FeeDepo.value.DueWallet) ?? '-',
+      TotalPay: String(this.payAmount) ?? '',
+      DueWallet: String(this.Getwallet) ?? '-',
       TranMode: this.FeeDepo.value.TranMode ?? '-',
-      GrandTotal: String(this.FeeDepo.value.GradTotal) ?? '',
+      GrandTotal: String("N/A") ?? '',
     }
-    // if(this.FeeDepo.valid){
-      this._feeManager.FeeCollection(model).subscribe(res=>{
-        if(res.state){
-          alert("Fee Collected Successfully");
-          this.ngOnInit();
-        }
-        else{
-          alert(res.data);
-        }
-      })
-    // }
+    this._feeManager.FeeCollection(model).subscribe(res=>{
+      if(res.state){
+        this.ngOnInit();
+        this.feeValue = [];
+        this.isFees = false;
+        window.location.reload();
+      }
+      else{
+        alert(res.data);
+      }
+    })
   }
 
 

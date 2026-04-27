@@ -48,7 +48,7 @@
                                 <div class="row ">
                                     <div class="col-lg-12 pt-2">
                                         <label class="col-form-label" style="padding-top: 0px;">Select Class Teacher</label>
-                                        <select class="form-select" formControlName="TeacherId">
+                                        <select class="form-select" (change)="SelectedTeacher($event)" formControlName="TeacherId">
                                             <option selected="">Select Fee</option>
                                             <option *ngFor="let a of TeacherList" [value]="a.TeacherId">{{a.Name}}</option>
                                         </select>
@@ -115,14 +115,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor=" let data of ">
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
-                                    <td scope="col">-</td>
+                                <tr *ngFor=" let data of DataReponse">
+                                    <td scope="col">{{data.CurrentDate}}</td>
+                                    <td scope="col">{{this.selectTeacerId[0].Name}}</td>
+                                    <td scope="col">{{data.StudentName.FirstName}}</td>
+                                    <td scope="col">{{data.FatherName.FatherName}}</td>
+                                    <td scope="col">{{data.StatusA}}</td>
+                                    <td scope="col">{{data.Note}}</td>
+                                    <td scope="col">Action</td>
                                 </tr>
                             </tbody>
                         </table>

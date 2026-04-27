@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationCustom02" class="form-label">Last Due Wallet</label>
+                                <label for="validationCustom02" class="form-label">Udhar Wallet* ( +Udhar:<span class="text-danger">₹{{CurrentDue??0}}</span>)</label>
                                 <input type="text" class="form-control" id="validationCustom02" formControlName="DueWallet" [(ngModel)]="Getwallet" readonly required>
                                 <div class="valid-feedback">
                                     Looks great!
@@ -253,7 +253,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Total Payment</label>
-                                <input type="number" class="form-control" id="validationCustom02" formControlName="TotalPay" placeholder="Net Payment" required>
+                                <!-- <label *ngIf="true" color="red">Your wallet balance is low</label> -->
+                                <input type="number" class="form-control" id="validationCustom02" formControlName="TotalPay" (keyup)="walletUpdate($event)" placeholder="Net Payment" required>
                                 <div class="valid-feedback">
                                     Looks great!
                                 </div>

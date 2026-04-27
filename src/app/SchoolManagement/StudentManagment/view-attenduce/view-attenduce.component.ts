@@ -18,6 +18,7 @@ export class ViewAttenduceComponent {
   teacherWise:any;
   isDayWise = true;
   formChange(a:any){
+    this.DataReponse = [];
     if(a == 'Month'){
       this.isDayWise = true;
     }else if(a == 'Day'){
@@ -60,12 +61,14 @@ export class ViewAttenduceComponent {
 
   overAllStd:any
   selectTeacerId:any
+
   SelectedTeacher(a:any){
-    this.selectTeacerId = a.target.value;
-    let teacherId = this.TeacherList.filter((item:any) => item.TeacherId == a.target.value);
-    console.log(teacherId);
-    let result = this.AllStd.filter((item:any) => item.ClassGenId == teacherId[0].ClassId);
+    this.overAllStd = [];
+    this.DataReponse = [];
+    this.selectTeacerId = this.TeacherList.filter((item:any) => item.TeacherId == a.target.value);
+    let result = this.AllStd.filter((item:any) => item.ClassGenId == this.selectTeacerId[0].ClassId);
      this.overAllStd = result;
+     console.log(this.overAllStd);
   }
 
   StudentId:any
@@ -76,19 +79,34 @@ export class ViewAttenduceComponent {
 
 
 
+  DataReponse:any
   onSubmit(a:any){
     let model;
     if(a == 'Student'){
+      this.DataReponse = [];
       this.isDayWise = true;
       model = {
         Date : this.StudentWise.value.StdDate,
-        TeacherId : +this.selectTeacerId,
+        TeacherId : this.selectTeacerId[0].TeacherId,
         StdId : this.StudentId
       }
       this._stdRec.AttendanceStudentId(model).subscribe((res:any)=>{
-        alert(res.data);
-  //       studentWise:any;
-  // teacherWise:any;
+
+
+        let resp = res.data;
+        resp.forEach((item:any) => {
+          this.DataReponse.push({
+            CurrentDate:item.CurrentDate,
+            StudentName:this.overAllStd.find((a:any)=>a.AdmissionId == item.AdmissionId),
+            FatherName:this.overAllStd.find((a:any)=>a.AdmissionId == item.AdmissionId),
+            StatusA:item.StatusA,
+            Note:item.Note
+          })
+        })
+
+        console.log(this.DataReponse);
+
+
       },(err:any)=>{
         alert(err)
       })
@@ -98,8 +116,18 @@ export class ViewAttenduceComponent {
         TeacherId : +this.TeacherWise.value.TeacherId,
         Date : this.TeacherWise.value.Date
       }
+      this.DataReponse = [];
       this._stdRec.AttendanceTeacherId(model).subscribe((res:any)=>{
-        alert(res.data);
+        let resp = res.data;
+        resp.forEach((item:any) => {
+          this.DataReponse.push({
+            CurrentDate:item.CurrentDate,
+            StudentName:this.overAllStd.find((a:any)=>a.AdmissionId == item.AdmissionId),
+            FatherName:this.overAllStd.find((a:any)=>a.AdmissionId == item.AdmissionId),
+            StatusA:item.StatusA,
+            Note:item.Note
+          })
+        })
       },(err:any)=>{
         alert(err.error)
       })

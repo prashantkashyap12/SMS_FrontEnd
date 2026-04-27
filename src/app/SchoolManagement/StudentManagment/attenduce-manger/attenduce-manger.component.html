@@ -51,7 +51,7 @@
                                     <tbody formArrayName="students">
                                         <tr *ngFor="let student of StudnetList; let i = index" [formGroupName]="i">
                                             <td><input type="text" [value]="student.AdmissionId" formControlName="RollNumber" class="form-control" readonly></td>
-                                            <td>{{ student.FirstName }} {{ student.LastName }}</td>
+                                            <td>{{ student.FirstName }}</td>
                                             <td>{{ student.FatherName }} ({{ student.PrimaryContact }})</td>
                                             <td>
                                                 <select class="form-select" formControlName="StatusA" required>

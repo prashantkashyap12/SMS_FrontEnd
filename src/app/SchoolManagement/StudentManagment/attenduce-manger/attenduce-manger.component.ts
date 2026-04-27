@@ -14,7 +14,6 @@ import moment from 'moment';
   styleUrl: './attenduce-manger.component.css'
 })
 export class AttenduceMangerComponent {
-
   teacherList:any;
   techerData:any[]=[];
   StudnetList:any[]=[];

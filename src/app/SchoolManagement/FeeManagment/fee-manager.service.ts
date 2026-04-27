@@ -19,7 +19,7 @@ export class FeeManagerService {
   }
 
   // Get Fee Structure
-  getFeeStructure(AdmissionId:any): Observable<any> {
+  getFeeStructure(AdmissionId?:any): Observable<any> {
     let url = this.baseUrl+'api/SMS_Config/FeeCollecitonGet2';
     return this._http.get(url, AdmissionId);
   }
