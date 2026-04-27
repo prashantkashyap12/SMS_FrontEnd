@@ -95,7 +95,7 @@ export class FeeCollectionComponent {
   }
 
   viewProfle:any
-  dueDate = moment(new Date()).format("YYYY-MM-15");
+  dueDate = moment(new Date()).format("YYYY-MM-15");;
   OpenFee(a:any){
     this.isFees = true;
     this.isList = false;
@@ -172,7 +172,13 @@ export class FeeCollectionComponent {
    totalAmount = 0;
    totalPenalty = 0;
   FeeMonth(a:any){
-    console.log(a.target.value);
+    let currentDate = new Date();
+    currentDate.setMonth(Number(a.target.value));
+    this.dueDate = moment(currentDate).format("YYYY-MM-15");
+
+
+
+
     this._feeManager.getRecipit().subscribe(res=>{
       console.log(res.data); 
       this.receipt = "ISHWARIPRASAD_"+res.data.toString();
@@ -191,6 +197,7 @@ export class FeeCollectionComponent {
             this.totalAmount += Number(item.Fee_Amount);
             totalPenalty += Number(item.Fee_Panalty);
         // });
+        
     });
     this.dueDate;
     this.tranDate;
@@ -198,6 +205,7 @@ export class FeeCollectionComponent {
       this.totalPenalty += totalPenalty;
     }
     this.grandTotal = this.totalAmount + this.totalPenalty;
+    this.baseTotal = this.grandTotal;
   }
 
   discountCalc(event:any){

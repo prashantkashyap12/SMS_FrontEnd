@@ -14,7 +14,8 @@ import { StdManagService } from '../std-manag.service';
   styleUrl: './view-attenduce.component.css'
 })
 export class ViewAttenduceComponent {
-
+  studentWise:any;
+  teacherWise:any;
   isDayWise = true;
   formChange(a:any){
     if(a == 'Month'){
@@ -85,7 +86,9 @@ export class ViewAttenduceComponent {
         StdId : this.StudentId
       }
       this._stdRec.AttendanceStudentId(model).subscribe((res:any)=>{
-        console.log(res.data);
+        alert(res.data);
+  //       studentWise:any;
+  // teacherWise:any;
       },(err:any)=>{
         alert(err)
       })
@@ -96,7 +99,7 @@ export class ViewAttenduceComponent {
         Date : this.TeacherWise.value.Date
       }
       this._stdRec.AttendanceTeacherId(model).subscribe((res:any)=>{
-        console.log(res.data);
+        alert(res.data);
       },(err:any)=>{
         alert(err.error)
       })
